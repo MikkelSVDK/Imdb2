@@ -1,10 +1,8 @@
 <?php
-class News {
+class User {
     public int $Id = null;
-    public string $Title;
-    public string $Description;
-    public string $Date;
-    
+    public string $Name;
+
     private $Database;
     public function __construct($database){
         $this->Database=$database;

@@ -1,9 +1,9 @@
 <?php
-class News {
+class User {
     public int $Id = null;
-    public string $Title;
-    public string $Description;
-    public string $Date;
+    public string $Street;
+    public string $City;
+    public string $Country;
     
     private $Database;
     public function __construct($database){
