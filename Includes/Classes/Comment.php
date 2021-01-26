@@ -9,4 +9,20 @@ class User {
     public function __construct($database){
         $this->Database=$database;
     }
+
+    public function GetUser(){
+
+    }
+    
+    public function Delete(){
+        
+    }
+
+    public function Edit(){
+        
+    }
+
+    public function Create(){
+        
+    }
   }
