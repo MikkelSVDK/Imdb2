@@ -1,58 +1,74 @@
-        <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
-            <div class="container">
-                <a href="../" class="navbar-brand">Bootswatch</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
-                    <div class="dropdown-menu" aria-labelledby="themes">
-                        <a class="dropdown-item" href="../default/">Default</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../cerulean/">Cerulean</a>
-                        <a class="dropdown-item" href="../cosmo/">Cosmo</a>
-                        <a class="dropdown-item" href="../cyborg/">Cyborg</a>
-                        <a class="dropdown-item" href="../darkly/">Darkly</a>
-                        <a class="dropdown-item" href="../flatly/">Flatly</a>
-                        <a class="dropdown-item" href="../journal/">Journal</a>
-                        <a class="dropdown-item" href="../litera/">Litera</a>
-                        <a class="dropdown-item" href="../lumen/">Lumen</a>
-                        <a class="dropdown-item" href="../lux/">Lux</a>
-                        <a class="dropdown-item" href="../materia/">Materia</a>
-                        <a class="dropdown-item" href="../minty/">Minty</a>
-                        <a class="dropdown-item" href="../pulse/">Pulse</a>
-                        <a class="dropdown-item" href="../sandstone/">Sandstone</a>
-                        <a class="dropdown-item" href="../simplex/">Simplex</a>
-                        <a class="dropdown-item" href="../sketchy/">Sketchy</a>
-                        <a class="dropdown-item" href="../slate/">Slate</a>
-                        <a class="dropdown-item" href="../solar/">Solar</a>
-                        <a class="dropdown-item" href="../spacelab/">Spacelab</a>
-                        <a class="dropdown-item" href="../superhero/">Superhero</a>
-                        <a class="dropdown-item" href="../united/">United</a>
-                        <a class="dropdown-item" href="../yeti/">Yeti</a>
-                    </div>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="../help/">Help</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="https://blog.bootswatch.com/">Blog</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">Sandstone <span class="caret"></span></a>
-                    <div class="dropdown-menu" aria-labelledby="download">
-                        <a class="dropdown-item" rel="noopener" target="_blank" href="https://jsfiddle.net/bootswatch/m0nv7a0o/">Open in JSFiddle</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../4/sandstone/bootstrap.min.css" download>bootstrap.min.css</a>
-                        <a class="dropdown-item" href="../4/sandstone/bootstrap.css" download>bootstrap.css</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="../4/sandstone/_variables.scss" download>_variables.scss</a>
-                        <a class="dropdown-item" href="../4/sandstone/_bootswatch.scss" download>_bootswatch.scss</a>
-                    </div>
-                    </li>
-                </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="padding-bottom: 0;">
+    <div class="navbar-toggler-right">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="collapse navbar-collapse flex-column" id="navbar">
+        <ul class="navbar-nav w-100 px-3">
+            <li class="nav-item">
+                <a href="#"><img src="/img/logo/Imdb2_logo.png" style="height:64px"/></a>
+            </li>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" style="padding: 1.5rem 0.9rem;" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="padding: 1.5rem 0.9rem;" href="#">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="padding: 1.5rem 0.9rem;" href="#">Contact</a>
+                </li>
+            </ul>
+        </ul>
+
+        <ul class="navbar-nav w-100 px-3" style="border-top: 1px dashed #ffffff44;">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Show all</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Latest trailers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Most commented</a>
+            </li>
+            <ul class="navbar-nav ml-auto">
+                <div style="padding:0.3rem 0.5rem 0.2rem;">
+                    <form>
+                        <div class="row">
+                            <div class="col-8 px-1">
+                                <input class="form-control form-control-sm" type="text" placeholder="Email address">
+                            </div>
+                            <div class="col-4 px-1">
+                                <button type="submit" class="btn btn-link" style="padding: 0.2rem 0.75rem 0;color: rgba(255,255,255,.5);">Search</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
-        </div>
+            </ul>
+        </ul>
+
+        <ul class="navbar-nav w-100 px-3" style="border-top: 1px dashed #ffffff44;">
+            <ul class="navbar-nav ml-auto">
+                <div style="padding:0.3rem 0.5rem 0.2rem;">
+                    <form>
+                        <div class="row">
+                            <div class="col-5 px-1">
+                                <input class="form-control form-control-sm" type="text" placeholder="Email address">
+                            </div>
+                            <div class="col-5 px-1">
+                                <input class="form-control form-control-sm" type="text" placeholder="Password">
+                            </div>
+                            <div class="col-2 px-1">
+                                <button type="submit" class="btn btn-link" style="padding: 0.2rem 0.75rem 0;color: rgba(255,255,255,.5);">Signin</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Not a member?</a>
+                </li>
+            </ul>
+        </ul>
+    </div>
+</nav>
