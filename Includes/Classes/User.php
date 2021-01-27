@@ -6,9 +6,8 @@ class User {
     public string $Email;
     public int $Phone;
     public string $CreationDate;
-
-    
     private $Database;
+
     public function __construct($database){
         $this->Database=$database;
     }
