@@ -8,7 +8,9 @@
     </head>
     <body>
 <?php include("includes/navbar.php"); ?>
-        Test
+        <div class="container">
+            test
+        </div>
     </body>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
