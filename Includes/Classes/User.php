@@ -1,6 +1,6 @@
 <?php
 class User {
-    public int $Id = null;
+    public ?int $Id = null;
     public string $Firstname;
     public string $Lastname;
     public string $Email;
@@ -18,7 +18,7 @@ class User {
             throw new Exception("User does not have an address");
     
         $addressData = $addressResult->fetch_assoc();
-        @return $addressData;
+        return $addressData;
     }
 
     public function GetImage(){
@@ -27,7 +27,7 @@ class User {
             throw new Exception("User does not have an image");
         
         $imageData = $imageResult->fetch_assoc();
-        return string $imageData["image"];
+        return $imageData["image"];
     }
 
     public function IsAdmin(){
@@ -36,13 +36,13 @@ class User {
             throw new Exception("Database error");
 
         $roleData = $roleResult->fetch_assoc();
-        return boolean $roleData["user_admin"] == 1;
+        return $roleData["user_admin"] == 1;
     }
     
     public function Delete(){
         $deleteResult = $this->Database->Query("DELETE FROM `Users` WHERE `user_id` = ?", "s", $this->Id);
 
-        return boolean $deleteResult->affected_rows > 0;
+        return $deleteResult->affected_rows > 0;
     }
 
     public function Edit(){

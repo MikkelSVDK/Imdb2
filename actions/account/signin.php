@@ -7,7 +7,7 @@ if($userResult->num_rows > 0){
     if(password_verify($_POST["password"], $userData["user_password"])){
         $_SESSION["uid"] = $userData["user_id"];
 
-        header("Location: /userprofile.php");
+        header("Location: /profile.php");
         die();
     }else
         setcookie("signin_error", "Forkert kode eller email", time() + 1);
