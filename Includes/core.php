@@ -1,4 +1,5 @@
 <?php
+session_start();
 require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/config.php");
 require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/database.php");
 

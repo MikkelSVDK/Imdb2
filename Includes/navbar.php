@@ -51,13 +51,13 @@
         <ul class="navbar-nav w-100 px-3" style="border-top: 1px dashed #ffffff44;">
             <ul class="navbar-nav ml-auto">
                 <div style="padding:0.3rem 0.5rem 0.2rem;">
-                    <form>
+                    <form action="/actions/account/signin.php" method="POST">
                         <div class="row">
                             <div class="col-5 px-1">
-                                <input class="form-control form-control-sm" type="text" placeholder="Email address">
+                                <input class="form-control form-control-sm" name="email" type="text" placeholder="Email address">
                             </div>
                             <div class="col-5 px-1">
-                                <input class="form-control form-control-sm" type="text" placeholder="Password">
+                                <input class="form-control form-control-sm" name="password" type="password" placeholder="Password">
                             </div>
                             <div class="col-2 px-1">
                                 <button type="submit" class="btn btn-link" style="padding: 0.2rem 0.75rem 0;color: rgba(255,255,255,.5);">Signin</button>
