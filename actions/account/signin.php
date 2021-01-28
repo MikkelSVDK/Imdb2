@@ -1,4 +1,4 @@
-functionality<?php
+<?php
 require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/core.php");
 
 $userResult = $Database->Query("SELECT `user_id`, `user_password` FROM `Users` WHERE `user_email` = ?", "s", $_POST["email"]);
