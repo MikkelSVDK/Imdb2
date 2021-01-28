@@ -53,8 +53,25 @@ class User {
         
     }
 
-    public function Create(){
+    public function Create($password, $address_street, $address_city, $address_country){
+        $createResult = $this->Database->Query("SELECT * FROM `Users` WHERE `user_email` = ?", "s", $this->Email);
+        if($createResult->num_rows == 0)
+            throw new Exception("User allready exists");
         
+        $createAddressResult = $this->Database->Query("SELECT `address_id` FROM `AddressBook` WHERE `address_steet` = ? AND `address_city` = ? AND `address_country` = ?", "sss", $address_street, $address_city, $address_country);
+        if($createAddressResult->num_rows > 0){
+            $addressData = $createAddressResult->fetch_assoc();
+            $address_id = $addressData["address_id"];
+        }else{
+            $this->Database->Query("INSERT INTO `AddressBook` (`address_id`, `address_steet`, `address_city`, `address_country`) VALUES (NULL, ?, ?, ?)", "sss", $address_street, $address_city, $address_country);
+            $address_id = $this->Database->GetLastInsertedId();
+        }
+
+        $this->Database->Query("INSERT INTO `Users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_phone`, `address_id`, `user_password`, `image_id`, `user_admin`, `user_creation_date`) VALUES (NULL, ?, ?, ?, ?, ?, ?, 1, 0, current_timestamp())", "ssssss", $this->Firstname, $this->Lastname, $this->Email, $this->Phone, $address_id, $password);
+        $this->Id = $this->Database->GetLastInsertedId();
+        $this->CreationDate = date("Y-m-d H:i:s");
+
+        return true;
     }
 
     public function Get($id){
