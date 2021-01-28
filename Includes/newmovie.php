@@ -11,15 +11,14 @@
     <body>
 <?php include("includes/navbar.php"); ?>
         <div class="container">
-            <h3>Login</h3>
-            <br>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Imdb2@Imdb2.dk">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Din kode</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="****">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>Nyheder</h4>
+                </div>
+                <div class="col-lg-6">
+                    <h4>Kommende film</h4>
+
+                </div>
             </div>
         </div>
 <?php include("includes/footer.php"); ?>
