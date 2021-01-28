@@ -21,7 +21,7 @@ class User {
     }
 
     public function IsAdmin(){
-
+        
     }
     
     public function Delete(){

@@ -6,7 +6,7 @@
             <a href=""><i class="fab fa-twitter"></i></a>&nbsp;
             <a href=""><i class="fab fa-instagram"></i></a>&nbsp;
             <a href=""><i class="fab fa-youtube"></i></a><br>
-            © <?= date("Y") ?> IMDB2 Inc.
+            © <?= date("Y") ?> IMDB2 Aps
         </center>
     </div>
 </footer>
