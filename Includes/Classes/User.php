@@ -30,6 +30,10 @@ class User {
         return $imageData["image"];
     }
 
+    public function IsSignedIn(){
+        return $this->Id != null;
+    }
+
     public function IsAdmin(){
         $roleResult = $this->Database->Query("SELECT `user_admin` FROM `Users` WHERE `user_id` = ?", "s", $this->Id);
         if($roleResult->num_rows == 0)

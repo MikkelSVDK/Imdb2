@@ -66,7 +66,7 @@
                     </form>
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Not a member?</a>
+                    <a class="nav-link" href="/signup.php">Not a member?</a>
                 </li>
             </ul>
         </ul>

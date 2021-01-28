@@ -18,6 +18,4 @@ if(isset($_SESSION["uid"])){
   }catch(Exception $error){
     print_r($error->getMessage());
   }
-
-  print_r($User);
 }
