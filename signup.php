@@ -11,15 +11,60 @@
     <body>
 <?php include("includes/navbar.php"); ?>
         <div class="container">
-            <h3>Login</h3>
+            <h3>Velkommen til IMDB2</h3>
             <br>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Imdb2@Imdb2.dk">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Fornavn</label>
+                        <input type="text" name="firstname" class="form-control" placeholder="Fornavn">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Efternavn</label>
+                        <input type="text" name="efternavn" class="form-control" placeholder="Efternavn">
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Din kode</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="****">
+                <label>Email adresse</label>
+                <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Imdb2@Imdb2.dk">
+            </div>
+            <div class="form-group">
+                <label>Telefon nummer</label>
+                <input type="text" name="telephonenumber" class="form-control" placeholder="Telefon Nummer">
+            </div>
+            <div class="form-group">
+                <label>Din kode</label>
+                <input type="password" name="password" class="form-control" placeholder="****">
+            </div>
+            <div class="form-group">
+                <label>Gentag kode</label>
+                <input type="password" name="repeatpassword" class="form-control" placeholder="****">
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="form-group">
+                        <label>Vej</label>
+                        <input type="text" name="road" class="form-control" placeholder="Vej">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>By</label>
+                        <input type="text" name="city" class="form-control" placeholder="By">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label>Land</label>
+                        <input type="text" name="country" class="form-control" placeholder="Land">
+                    </div>
+                </div>
+                <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-primary">Videre</button>
+                </div>
             </div>
         </div>
 <?php include("includes/footer.php"); ?>
