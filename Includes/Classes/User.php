@@ -55,7 +55,7 @@ class User {
 
     public function Create($password, $address_street, $address_city, $address_country){
         $createResult = $this->Database->Query("SELECT * FROM `Users` WHERE `user_email` = ?", "s", $this->Email);
-        if($createResult->num_rows == 0)
+        if($createResult->num_rows > 0)
             throw new Exception("User allready exists");
         
         $createAddressResult = $this->Database->Query("SELECT `address_id` FROM `AddressBook` WHERE `address_steet` = ? AND `address_city` = ? AND `address_country` = ?", "sss", $address_street, $address_city, $address_country);
