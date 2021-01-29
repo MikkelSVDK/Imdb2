@@ -67,7 +67,8 @@ class User {
             $address_id = $this->Database->GetLastInsertedId();
         }
 
-        $this->Database->Query("INSERT INTO `Users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_phone`, `address_id`, `user_password`, `image_id`, `user_admin`, `user_creation_date`) VALUES (NULL, ?, ?, ?, ?, ?, ?, 1, 0, current_timestamp())", "ssssss", $this->Firstname, $this->Lastname, $this->Email, $this->Phone, $address_id, $password);
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $this->Database->Query("INSERT INTO `Users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_phone`, `address_id`, `user_password`, `image_id`, `user_admin`, `user_creation_date`) VALUES (NULL, ?, ?, ?, ?, ?, ?, 1, 0, current_timestamp())", "ssssss", $this->Firstname, $this->Lastname, $this->Email, $this->Phone, $address_id, $hashedPassword);
         $this->Id = $this->Database->GetLastInsertedId();
         $this->CreationDate = date("Y-m-d H:i:s");
 
