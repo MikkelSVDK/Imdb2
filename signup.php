@@ -30,7 +30,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Efternavn</label>
-                            <input type="text" name="efternavn" class="form-control" placeholder="Efternavn">
+                            <input type="text" name="lastname" class="form-control" placeholder="Efternavn">
                         </div>
                     </div>
                 </div>
