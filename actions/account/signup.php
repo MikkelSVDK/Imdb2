@@ -10,12 +10,13 @@ if(!isset($_SESSION["uid"])){
             $NewUser->Email = $_POST["email"];
             $NewUser->Phone = $_POST["telephonenumber"];
 
-            $NewUser->Create($_POST["password"], $_POST["road"], $_POST["city"], $_POST["country"]);
+            if($NewUser->Create($_POST["password"], $_POST["road"], $_POST["city"], $_POST["country"])){
+                $_SESSION["uid"] = $NewUser->Id;
 
-            $_SESSION["uid"] = $userData["user_id"];
-
-            header("Location: /profile.php");
-            die();
+                header("Location: /profile.php");
+                die();
+            }else
+            setcookie("signup_error", "Kunne ikke oprette kontoen", time() + 1);
         }else
             setcookie("signup_error", "Adgangskoderne matcher ikke", time() + 1);
     }else
