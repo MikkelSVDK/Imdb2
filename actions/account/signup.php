@@ -16,7 +16,7 @@ if(!isset($_SESSION["uid"])){
                 header("Location: /profile.php");
                 die();
             }else
-            setcookie("signup_error", "Kunne ikke oprette kontoen", time() + 1);
+                setcookie("signup_error", "Kunne ikke oprette kontoen", time() + 1);
         }else
             setcookie("signup_error", "Adgangskoderne matcher ikke", time() + 1);
     }else
