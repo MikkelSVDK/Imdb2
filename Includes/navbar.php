@@ -7,24 +7,24 @@
     <div class="collapse navbar-collapse flex-column" id="navbar">
         <ul class="navbar-nav w-100 px-3">
             <li class="nav-item">
-                <a href="#"><img src="/img/logo/Imdb2_logo.png" style="height:64px"/></a>
+                <a href="/"><img src="/img/logo/Imdb2_logo.png" style="height:64px"/></a>
             </li>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" style="padding: 1.5rem 0.9rem;" href="#">Home</a>
+                    <a class="nav-link" style="padding: 1.5rem 0.9rem;" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="padding: 1.5rem 0.9rem;" href="#">News</a>
+                    <a class="nav-link" style="padding: 1.5rem 0.9rem;" href="/news.php">News</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="padding: 1.5rem 0.9rem;" href="#">Contact</a>
+                    <a class="nav-link" style="padding: 1.5rem 0.9rem;" href="/contact.php">Contact</a>
                 </li>
             </ul>
         </ul>
 
         <ul class="navbar-nav w-100 px-3" style="border-top: 1px dashed #ffffff44;">
             <li class="nav-item">
-                <a class="nav-link" href="#">Show all</a>
+                <a class="nav-link" href="/movies.php">Show all</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Latest trailers</a>
@@ -37,7 +37,7 @@
                     <form>
                         <div class="row">
                             <div class="col-8 px-1">
-                                <input class="form-control form-control-sm" type="text" placeholder="Email address">
+                                <input class="form-control form-control-sm" type="text" placeholder="Søg">
                             </div>
                             <div class="col-4 px-1">
                                 <button type="submit" class="btn btn-link" style="padding: 0.2rem 0.75rem 0;color: rgba(255,255,255,.5);">Search</button>
@@ -47,9 +47,9 @@
                 </div>
             </ul>
         </ul>
-
         <ul class="navbar-nav w-100 px-3" style="border-top: 1px dashed #ffffff44;">
             <ul class="navbar-nav ml-auto">
+<?php if(!$User->IsSignedIn()) { ?>
                 <div style="padding:0.3rem 0.5rem 0.2rem;">
                     <form action="/actions/account/signin.php" method="POST">
                         <div class="row">
@@ -68,6 +68,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/signup.php">Not a member?</a>
                 </li>
+<?php }else{ ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile.php">Profil</a>
+                </li>
+<?php } ?>
             </ul>
         </ul>
     </div>

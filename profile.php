@@ -1,4 +1,11 @@
-<?php require("includes/core.php"); ?>
+<?php 
+require("includes/core.php");
+if(!$User->IsSignedIn()){
+    header("Location: /");
+    die();
+}
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,28 +27,32 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                        <label class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control-plaintext" id="staticEmail" value="Bing@Gmail.com">
+                            <input type="text" class="form-control-plaintext" value="<?= $User->Email ?>">
                         </div>
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Fornavn</label>
+                        <label class="col-sm-2 col-form-label">Fornavn</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control-plaintext" id="staticFornavn" value="Fornavn">
+                            <input type="text" class="form-control-plaintext" value="<?= $User->Firstname ?>">
                         </div>
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Efternavn</label>
+                        <label class="col-sm-2 col-form-label">Efternavn</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control-plaintext" id="staticEfternavn" value="Efternavn">
+                            <input type="text" class="form-control-plaintext" value="<?= $User->Lastname ?>">
                         </div>
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Telefon</label>
+                        <label class="col-sm-2 col-form-label">Telefon</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control-plaintext" id="staticEfternavn" value="27272727">
+                            <input type="text" class="form-control-plaintext" value="<?= $User->Phone ?>">
                         </div>
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Kode</label>
+                        <label class="col-sm-2 col-form-label">Kode</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control-plaintext" id="staticKode" placeholder="Ændrekode">
+                            <input type="password" class="form-control-plaintext" placeholder="Nye kode">
+                        </div>
+                        <label class="col-sm-2 col-form-label">Kode</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control-plaintext" placeholder="Gentag nye kode">
                         </div>
                         <div class="btn-group-vertical">
-                            <button type="button" class="btn btn-primary">Button</button>
+                            <button type="button" class="btn btn-primary">Gem</button>
                         </div>
                     </div>
                 </div>
