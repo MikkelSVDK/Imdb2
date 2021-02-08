@@ -10,7 +10,7 @@ try{
 }catch(Exception $error){
   print_r($error->getMessage());
 }
-
+$User = null;
 if(isset($_SESSION["uid"])){
   $User = new User($Database);
   try{

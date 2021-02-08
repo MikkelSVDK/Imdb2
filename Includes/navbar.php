@@ -49,7 +49,7 @@
         </ul>
         <ul class="navbar-nav w-100 px-3" style="border-top: 1px dashed #ffffff44;">
             <ul class="navbar-nav ml-auto">
-<?php if(!$User->IsSignedIn()) { ?>
+<?php if($User==null) { ?>
                 <div style="padding:0.3rem 0.5rem 0.2rem;">
                     <form action="/actions/account/signin.php" method="POST">
                         <div class="row">
