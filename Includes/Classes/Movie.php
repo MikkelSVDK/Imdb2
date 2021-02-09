@@ -23,11 +23,20 @@ class Movie {
     }
 
     public function GetTrailerLink(){
-        
+
     }
 
     public function GetComments(){
+        $comments = [];
         
+        $commentResult = $this->Database->Query("SELECT `comment_id` FROM `Comments` WHERE `movie_id` = ?", "s", $this->Id);
+        while($commentData = $commentResult->fetch_assoc()){
+            $Comment = new Comment($this->Database);
+            $Comment->Get($commentData["comment_id"]);
+            array_push($comments, $Comment);
+        }
+
+        return $comments;
     }
 
     public function GetMovieWriters(){
@@ -49,7 +58,7 @@ class Movie {
     public function Get($id){
         $getResult = $this->Database->Query("SELECT * FROM `Moives` WHERE `movie_id` = ?", "s", $id);
         if($getResult->num_rows == 0)
-            throw new Exception("`Movie` does exist");
+            throw new Exception("Movie does not exist");
         
         $getData = $getResult->fetch_assoc();
         $this->Id = $getData["movie_id"];

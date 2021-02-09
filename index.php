@@ -21,14 +21,14 @@ while($movieData = $movieResult->fetch_assoc()){
 ?>
                 <div class="col-lg-2">
                     <div class="movie-overlay">
-                        <a href="">
+                        <a href="/movie.php?id=<?= $Movie->Id ?>">
                             <i class="far fa-play-circle"></i><br>
                             <div class="play">Play trailer</div>
                             <div class="title"><?= $Movie->Title ?></div>
                         </a>
                     </div>
-                    <img class="movie-img img-fluid" src="<?= $Movie->GetImage(); ?>">
-                    <span class="float-right"><i class="fas fa-comment-alt movie-comment"></i><b class="movie-comment-number">9</b></span>
+                    <img class="movie-img img-fluid" src="<?= $Movie->GetImage() ?>">
+                    <span class="float-right"><i class="fas fa-comment-alt movie-comment"></i><b class="movie-comment-number"><?= count($Movie->GetComments()) ?></b></span>
                 </div>
 <?php
 }
@@ -39,17 +39,26 @@ while($movieData = $movieResult->fetch_assoc()){
                 <div class="col-12">
                     <h4>Most commented <span class="float-right"><a href="">See all</a></span></h4>
                 </div>
+                <?php
+$movieResult = $Database->Query("SELECT `Moives`.`movie_id`, `Comments`.`comments` FROM `Moives` LEFT OUTER JOIN (SELECT `movie_id`, count(`comment_id`) AS `comments` FROM `Comments` GROUP BY `movie_id`) AS `Comments` ON `Comments`.`movie_id` = `Moives`.`movie_id` ORDER BY `Comments`.`comments` DESC");
+while($movieData = $movieResult->fetch_assoc()){
+  $Movie = new Movie($Database);
+  $Movie->Get($movieData["movie_id"]);
+?>
                 <div class="col-lg-2">
                     <div class="movie-overlay">
-                        <a href="">
+                        <a href="/movie.php?id=<?= $Movie->Id ?>">
                             <i class="far fa-play-circle"></i><br>
                             <div class="play">Play trailer</div>
-                            <div class="title">Spider-Man</div>
+                            <div class="title"><?= $Movie->Title ?></div>
                         </a>
                     </div>
-                    <img class="img-fluid" src="https://m.media-amazon.com/images/M/MV5BZDEyN2NhMjgtMjdhNi00MmNlLWE5YTgtZGE4MzNjMTRlMGEwXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_UX182_CR0,0,182,268_AL_.jpg">
-                    <span class="float-right"><i class="fas fa-comment-alt movie-comment"></i><b class="movie-comment-number">9</b></span>
+                    <img class="movie-img img-fluid" src="<?= $Movie->GetImage() ?>">
+                    <span class="float-right"><i class="fas fa-comment-alt movie-comment"></i><b class="movie-comment-number"><?= count($Movie->GetComments()) ?></b></span>
                 </div>
+<?php
+}
+?>
             </div>
 <?php include("includes/bottomnews.php"); ?> 
         </div>
