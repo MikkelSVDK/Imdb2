@@ -56,6 +56,10 @@ a:hover{
     margin-top: 5px;
 }
 
+.movie-img {
+    max-height: 235px;
+}
+
 .movie-comment-number{
     position:absolute;
     color:white;

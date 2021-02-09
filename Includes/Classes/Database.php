@@ -2,9 +2,10 @@
 class Database {
   private $Conn;
   
-  public function Query($query, $type, &...$params) {
+  public function Query($query, $type = null, &...$params) {
 	$stmt = $this->Conn->prepare($query);
-	call_user_func_array(array($stmt, "bind_param"), array_merge([$type], $params));
+	if($type != null)
+		call_user_func_array(array($stmt, "bind_param"), array_merge([$type], $params));
 	$stmt->execute();
 	return $stmt->get_result();
   }
