@@ -14,7 +14,7 @@
             <h4>Latest trailers <span class="float-right"><a href="">See all</a></span></h4>
             <div class="row">
 <?php
-$movieResult = $Database->Query("SELECT `movie_id` FROM `Moives` ORDER BY `Moives`.`movie_release` DESC");
+$movieResult = $Database->Query("SELECT `movie_id` FROM `Moives` ORDER BY `Moives`.`movie_release` DESC LIMIT 6");
 while($movieData = $movieResult->fetch_assoc()){
   $Movie = new Movie($Database);
   $Movie->Get($movieData["movie_id"]);
@@ -40,7 +40,7 @@ while($movieData = $movieResult->fetch_assoc()){
                     <h4>Most commented <span class="float-right"><a href="">See all</a></span></h4>
                 </div>
                 <?php
-$movieResult = $Database->Query("SELECT `Moives`.`movie_id`, `Comments`.`comments` FROM `Moives` LEFT OUTER JOIN (SELECT `movie_id`, count(`comment_id`) AS `comments` FROM `Comments` GROUP BY `movie_id`) AS `Comments` ON `Comments`.`movie_id` = `Moives`.`movie_id` ORDER BY `Comments`.`comments` DESC");
+$movieResult = $Database->Query("SELECT `Moives`.`movie_id`, `Comments`.`comments` FROM `Moives` LEFT OUTER JOIN (SELECT `movie_id`, count(`comment_id`) AS `comments` FROM `Comments` GROUP BY `movie_id`) AS `Comments` ON `Comments`.`movie_id` = `Moives`.`movie_id` ORDER BY `Comments`.`comments` DESC LIMIT 6");
 while($movieData = $movieResult->fetch_assoc()){
   $Movie = new Movie($Database);
   $Movie->Get($movieData["movie_id"]);
