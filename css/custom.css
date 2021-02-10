@@ -69,6 +69,10 @@ a:hover{
     width:22px;
 }
 
+.news {
+    margin-bottom: 10px;
+}
+
 .news h5 {
     color: red;
     margin: 0;
