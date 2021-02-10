@@ -11,7 +11,7 @@
                 <div class="col-lg-6">
                     <h4>COMMING SOON <span class="float-right"><a href="">See all</a></span></h4>
 <?php
-$movieResult = $Database->Query("SELECT `movie_id` FROM `Moives` WHERE `movie_release` > CURRENT_TIMESTAMP ORDER BY `movie_release` DESC LIMIT 3");
+$movieResult = $Database->Query("SELECT `movie_id` FROM `Moives` WHERE `movie_release` > CURRENT_TIMESTAMP ORDER BY `movie_release` ASC LIMIT 3");
 while($movieData = $movieResult->fetch_assoc()){
   $Movie = new Movie($Database);
   $Movie->Get($movieData["movie_id"]);
