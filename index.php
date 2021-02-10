@@ -14,7 +14,7 @@
             <h4>Latest trailers <span class="float-right"><a href="">See all</a></span></h4>
             <div class="row">
 <?php
-$movieResult = $Database->Query("SELECT `movie_id` FROM `Moives` ORDER BY `Moives`.`movie_release` DESC LIMIT 6");
+$movieResult = $Database->Query("SELECT `movie_id` FROM `Moives` WHERE `movie_release` < CURRENT_TIMESTAMP ORDER BY `movie_release` DESC LIMIT 6");
 while($movieData = $movieResult->fetch_assoc()){
   $Movie = new Movie($Database);
   $Movie->Get($movieData["movie_id"]);

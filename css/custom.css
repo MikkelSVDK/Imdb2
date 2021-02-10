@@ -81,3 +81,8 @@ a:hover{
 .news .row .col-9{
     padding-left: 5px;
 }
+
+.news a{
+    text-decoration: none;
+    color: unset;
+}
