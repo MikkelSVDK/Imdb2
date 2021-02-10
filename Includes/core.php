@@ -4,6 +4,9 @@ require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/config.php");
 require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/database.php");
 require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/user.php");
 require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/comment.php");
+require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/writer.php");
+require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/star.php");
+require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/Genre.php");
 require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/movie.php");
 
 $Database = null;

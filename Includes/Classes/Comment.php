@@ -11,7 +11,13 @@ class Comment {
     }
 
     public function GetUser(){
+        $commentResult = $this->Database->Query("SELECT `user_id` FROM `Comments` WHERE `comment_id` = ?", "s", $this->Id);
+        $commentData = $commentResult->fetch_assoc();
 
+        $user = new User($this->Database);
+        $user->Get($commentData["user_id"]);
+        
+        return $user;
     }
     
     public function Delete(){
@@ -22,8 +28,19 @@ class Comment {
         
     }
 
-    public function Create(){
+    public function Create($user_id, $movie_id){
+        $getResult = $this->Database->Query("SELECT * FROM `Users` WHERE `user_id` = ?", "s", $user_id);
+        if($getResult->num_rows == 0)
+            throw new Exception("User does not exist");
         
+
+        $getResult = $this->Database->Query("SELECT * FROM `Moives` WHERE `movie_id` = ?", "s", $movie_id);
+        if($getResult->num_rows == 0)
+            throw new Exception("Movie does not exist");
+        
+        $this->Database->Query("INSERT INTO `Comments` (`comment_id`, `user_id`, `movie_id`, `comment_rating`, `comment_text`, `comment_date`) VALUES (NULL, ?, ?, ?, ?, current_timestamp())", "ssss", $user_id, $movie_id, $this->Rating, $this->Text);
+
+        return true;
     }
 
     public function Get($id){
