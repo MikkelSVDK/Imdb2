@@ -11,7 +11,7 @@
     <body>
 <?php include("includes/navbar.php"); ?>
         <div class="container">
-            <h4>Latest trailers <span class="float-right"><a href="">See all</a></span></h4>
+            <h4>Latest trailers <span class="float-right"><a href="/movies.php?sort=latest">See all</a></span></h4>
             <div class="row">
 <?php
 $movieResult = $Database->Query("SELECT `movie_id` FROM `Moives` WHERE `movie_release` < CURRENT_TIMESTAMP ORDER BY `movie_release` DESC LIMIT 6");
@@ -37,7 +37,7 @@ while($movieData = $movieResult->fetch_assoc()){
             <br>
             <div class="row">
                 <div class="col-12">
-                    <h4>Most commented <span class="float-right"><a href="">See all</a></span></h4>
+                    <h4>Most commented <span class="float-right"><a href="/movies.php?sort=mostcommented">See all</a></span></h4>
                 </div>
                 <?php
 $movieResult = $Database->Query("SELECT `Moives`.`movie_id`, `Comments`.`comments` FROM `Moives` LEFT OUTER JOIN (SELECT `movie_id`, count(`comment_id`) AS `comments` FROM `Comments` GROUP BY `movie_id`) AS `Comments` ON `Comments`.`movie_id` = `Moives`.`movie_id` ORDER BY `Comments`.`comments` DESC LIMIT 6");

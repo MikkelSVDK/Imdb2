@@ -20,8 +20,10 @@ if(empty($_GET["search"])){
         $query = "SELECT `movie_id` FROM `Moives`";
     else if($_GET["sort"] == "latest")
         $query = "SELECT `movie_id` FROM `Moives` ORDER BY `movie_release` DESC";
-    else if($_GET["sort"] == "mostcommented")
+        else if($_GET["sort"] == "mostcommented")
         $query = "SELECT `Moives`.`movie_id`, `Comments`.`comments` FROM `Moives` LEFT OUTER JOIN (SELECT `movie_id`, count(`comment_id`) AS `comments` FROM `Comments` GROUP BY `movie_id`) AS `Comments` ON `Comments`.`movie_id` = `Moives`.`movie_id` ORDER BY `Comments`.`comments` DESC";
+        else if($_GET["sort"] == "commingsoon")
+        $query = "SELECT `movie_id` FROM `Moives` WHERE `movie_release` > CURRENT_TIMESTAMP ORDER BY `movie_release` ASC";
     $movieResult = $Database->Query($query);
 }else{
     $search = "%".implode("%", str_split($_GET["search"]))."%";
