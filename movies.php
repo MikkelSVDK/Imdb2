@@ -12,55 +12,46 @@
 <?php include("includes/navbar.php"); ?>
         <div class="container">
             <div class="row">
+<?php
+$i = 0;
+
+if(empty($_GET["search"])){
+    if(empty($_GET["sort"]))
+        $query = "SELECT `movie_id` FROM `Moives`";
+    else if($_GET["sort"] == "latest")
+        $query = "SELECT `movie_id` FROM `Moives` ORDER BY `movie_release` DESC";
+    else if($_GET["sort"] == "mostcommented")
+        $query = "SELECT `Moives`.`movie_id`, `Comments`.`comments` FROM `Moives` LEFT OUTER JOIN (SELECT `movie_id`, count(`comment_id`) AS `comments` FROM `Comments` GROUP BY `movie_id`) AS `Comments` ON `Comments`.`movie_id` = `Moives`.`movie_id` ORDER BY `Comments`.`comments` DESC";
+    $movieResult = $Database->Query($query);
+}else{
+    $search = "%".implode("%", str_split($_GET["search"]))."%";
+    $movieResult = $Database->Query("SELECT `movie_id` FROM `Moives` WHERE `movie_title` LIKE ?", "s", $search);
+}
+
+while($movieData = $movieResult->fetch_assoc()){
+  $i++;
+  $Movie = new Movie($Database);
+  $Movie->Get($movieData["movie_id"]);
+?>
                 <div class="col-lg-2">
-                    <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_3N0VetpYvQE%2FSwxqEAu9_HI%2FAAAAAAAAATo%2Fs6D3g8096AQ%2Fs1600%2FBatman_The_Dark_Knight_23.jpg&f=1&nofb=1" alt="">
+                    <div class="movie-overlay">
+                        <a href="/movie.php?id=<?= $Movie->Id ?>">
+                            <i class="far fa-play-circle"></i><br>
+                            <div class="play">Play trailer</div>
+                            <div class="title"><?= $Movie->Title ?></div>
+                        </a>
+                    </div>
+                    <center><img class="movie-img img-fluid" src="<?= $Movie->GetImage() ?>"></center>
+                    <span class="float-right"><i class="fas fa-comment-alt movie-comment"></i><b class="movie-comment-number"><?= count($Movie->GetComments()) ?></b></span>
                 </div>
-                <div class="col-lg-2">
-                    <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_3N0VetpYvQE%2FSwxqEAu9_HI%2FAAAAAAAAATo%2Fs6D3g8096AQ%2Fs1600%2FBatman_The_Dark_Knight_23.jpg&f=1&nofb=1" alt="">
-                </div>
-                <div class="col-lg-2">
-                    <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_3N0VetpYvQE%2FSwxqEAu9_HI%2FAAAAAAAAATo%2Fs6D3g8096AQ%2Fs1600%2FBatman_The_Dark_Knight_23.jpg&f=1&nofb=1" alt="">
-                </div>
-                <div class="col-lg-2">
-                    <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_3N0VetpYvQE%2FSwxqEAu9_HI%2FAAAAAAAAATo%2Fs6D3g8096AQ%2Fs1600%2FBatman_The_Dark_Knight_23.jpg&f=1&nofb=1" alt="">
-                </div>
-                <div class="col-lg-2">
-                    <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_3N0VetpYvQE%2FSwxqEAu9_HI%2FAAAAAAAAATo%2Fs6D3g8096AQ%2Fs1600%2FBatman_The_Dark_Knight_23.jpg&f=1&nofb=1" alt="">
-                </div>
-                <div class="col-lg-2">
-                    <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_3N0VetpYvQE%2FSwxqEAu9_HI%2FAAAAAAAAATo%2Fs6D3g8096AQ%2Fs1600%2FBatman_The_Dark_Knight_23.jpg&f=1&nofb=1" alt="">
-                </div>
+<?php if($i == 6){ $i = 0; ?> 
             </div>
             <br>
             <div class="row">
-                <div class="col-lg-2">
-                    <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_3N0VetpYvQE%2FSwxqEAu9_HI%2FAAAAAAAAATo%2Fs6D3g8096AQ%2Fs1600%2FBatman_The_Dark_Knight_23.jpg&f=1&nofb=1" alt="">
-                </div>
-                <div class="col-lg-2">
-                    <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_3N0VetpYvQE%2FSwxqEAu9_HI%2FAAAAAAAAATo%2Fs6D3g8096AQ%2Fs1600%2FBatman_The_Dark_Knight_23.jpg&f=1&nofb=1" alt="">
-                </div>
-                <div class="col-lg-2">
-                    <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_3N0VetpYvQE%2FSwxqEAu9_HI%2FAAAAAAAAATo%2Fs6D3g8096AQ%2Fs1600%2FBatman_The_Dark_Knight_23.jpg&f=1&nofb=1" alt="">
-                </div>
-                <div class="col-lg-2">
-                    <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_3N0VetpYvQE%2FSwxqEAu9_HI%2FAAAAAAAAATo%2Fs6D3g8096AQ%2Fs1600%2FBatman_The_Dark_Knight_23.jpg&f=1&nofb=1" alt="">
-                </div>
-                <div class="col-lg-2">
-                    <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_3N0VetpYvQE%2FSwxqEAu9_HI%2FAAAAAAAAATo%2Fs6D3g8096AQ%2Fs1600%2FBatman_The_Dark_Knight_23.jpg&f=1&nofb=1" alt="">
-                </div>
-                <div class="col-lg-2">
-                    <img class="img-fluid" src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F4.bp.blogspot.com%2F_3N0VetpYvQE%2FSwxqEAu9_HI%2FAAAAAAAAATo%2Fs6D3g8096AQ%2Fs1600%2FBatman_The_Dark_Knight_23.jpg&f=1&nofb=1" alt="">
-                </div>
-            </div>
-            
-            <Hr />
-            <div class="row">
-                <div class="col-lg-6">
-                    NEWS
-                </div>
-                <div class="col-lg-6">
-                    COMING SOON!
-                </div>
+<?php
+  }
+}
+?>
             </div>
         </div>
 

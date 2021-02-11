@@ -2,11 +2,20 @@
             <div class="row">
                 <div class="col-lg-6">
                     <h4>NEWS <span class="float-right"><a href="">See all</a></span></h4>
+<?php
+$newsResult = $Database->Query("SELECT * FROM `News` ORDER BY `news_date` DESC LIMIT 3");
+while($newsData = $newsResult->fetch_assoc()){
+  $News = new News($Database);
+  $News->Get($newsData["news_id"]);
+?>
                     <div class="news">
-                        <small>11.09.18</small>
-                        <h5>Title</h5>
-                        <p>Meget tekst</p>
+                        <small><?= date("d.m.Y", strtotime($News->Date)) ?></small>
+                        <h5><?= $News->Title ?></h5>
+                        <p><?= $News->Description ?></p>
                     </div>
+<?php 
+}
+?>
                 </div>
                 <div class="col-lg-6">
                     <h4>COMMING SOON <span class="float-right"><a href="">See all</a></span></h4>

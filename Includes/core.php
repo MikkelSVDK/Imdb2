@@ -9,6 +9,7 @@ require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/star.php");
 require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/Genre.php");
 require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/movie.php");
 require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/ticket.php");
+require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/classes/news.php");
 
 
 $Database = null;

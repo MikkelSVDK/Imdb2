@@ -27,7 +27,7 @@ while($movieData = $movieResult->fetch_assoc()){
                             <div class="title"><?= $Movie->Title ?></div>
                         </a>
                     </div>
-                    <img class="movie-img img-fluid" src="<?= $Movie->GetImage() ?>">
+                    <center><img class="movie-img img-fluid" src="<?= $Movie->GetImage() ?>"></center>
                     <span class="float-right"><i class="fas fa-comment-alt movie-comment"></i><b class="movie-comment-number"><?= count($Movie->GetComments()) ?></b></span>
                 </div>
 <?php
@@ -53,7 +53,7 @@ while($movieData = $movieResult->fetch_assoc()){
                             <div class="title"><?= $Movie->Title ?></div>
                         </a>
                     </div>
-                    <img class="movie-img img-fluid" src="<?= $Movie->GetImage() ?>">
+                    <center><img class="movie-img img-fluid" src="<?= $Movie->GetImage() ?>"></center>
                     <span class="float-right"><i class="fas fa-comment-alt movie-comment"></i><b class="movie-comment-number"><?= count($Movie->GetComments()) ?></b></span>
                 </div>
 <?php

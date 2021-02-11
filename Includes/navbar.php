@@ -27,17 +27,17 @@
                 <a class="nav-link" href="/movies.php">Show all</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Latest trailers</a>
+                <a class="nav-link" href="/movies.php?sort=latest">Latest trailers</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Most commented</a>
+                <a class="nav-link" href="/movies.php?sort=mostcommented">Most commented</a>
             </li>
             <ul class="navbar-nav ml-auto">
                 <div style="padding:0.3rem 0.5rem 0.2rem;">
-                    <form>
+                    <form action="/movies.php">
                         <div class="row">
                             <div class="col-8 px-1">
-                                <input class="form-control form-control-sm" type="text" placeholder="Søg">
+                                <input class="form-control form-control-sm" type="text" name="search" <?= !empty($_GET["search"]) ? 'value="'.$_GET["search"].'"' : 'placeholder="Søg"' ?>>
                             </div>
                             <div class="col-4 px-1">
                                 <button type="submit" class="btn btn-link" style="padding: 0.2rem 0.75rem 0;color: rgba(255,255,255,.5);">Search</button>
