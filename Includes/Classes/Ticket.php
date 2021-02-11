@@ -1,6 +1,6 @@
 <?php
-class User {
-    public int $Id = null;
+class Ticket {
+    public ?int $Id = null;
     public string $Fullname;
     public string $Email;
     public string $Message;
@@ -19,6 +19,8 @@ class User {
     }
 
     public function Create(){
-        
+        $this->Database->Query("INSERT INTO `msv_ibdb2`.`Tickets` (`ticket_name`, `ticket_email`, `ticket_message`) VALUES (?, ?, ?);", "sss", $this->Fullname, $this->Email, $this->Message);
+
+        return true;
     }
   }

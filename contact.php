@@ -13,21 +13,24 @@
         <div class="container">
             <h2>Kontakt ImbD2</h2>
             <br>
-            <div class="form-group">
-                <input type="name" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" placeholder="Skriv fulde navn">
-            </div>
-                        
-            <div class="form-group">
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Skriv email">
-            </div>
-            
-            <div class="form-group">
-                <textarea class="form-control" id="exampleTextarea" rows="4" placeholder="Hvad har du brug for hjælp til?"></textarea>
-            </div>
+            <form method="post" action="/actions/tickets/create.php">
 
-            <div class="btn-group-vertical">
-                <button type="button" class="btn btn-primary">Send</button>
-            </div>
+                <div class="form-group">
+                    <input type="name" class="form-control" name="Name" aria-describedby="nameHelp" placeholder="Skriv fulde navn">
+                </div>
+                            
+                <div class="form-group">
+                    <input type="email" class="form-control" name="Email" aria-describedby="emailHelp" placeholder="Skriv email">
+                </div>
+                
+                <div class="form-group">
+                    <textarea class="form-control" name="Text" rows="4" placeholder="Hvad har du brug for hjælp til?"></textarea>
+                </div>
+
+                <div class="btn-group-vertical">
+                    <button type="submit" name="SubmitButton" class="btn btn-primary">Send</button>
+                </div>
+            </form>
         </div>
 <?php include("includes/footer.php"); ?>
     </body>
