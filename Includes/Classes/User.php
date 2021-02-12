@@ -50,7 +50,14 @@ class User {
     }
 
     public function Edit(){
-        
+        $this->Database->Query("UPDATE `Users` SET `user_firstname` = ?, `user_lastname` = ?, `user_email` = ?, `user_phone` = ? WHERE `user_id` = ?", "sssss", $this->Firstname, $this->Lastname, $this->Email, $this->Phone, $this->Id);
+        return true;
+    }
+
+    public function UpdatePassword($password){
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $this->Database->Query("UPDATE `Users` SET `user_password` = ? WHERE `user_id` = ?", "ss", $hashedPassword, $this->Id);
+        return true;
     }
 
     public function Create($password, $address_street, $address_city, $address_country){
