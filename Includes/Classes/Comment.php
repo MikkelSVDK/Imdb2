@@ -21,7 +21,8 @@ class Comment {
     }
     
     public function Delete(){
-        
+        $DeleteResult = $this->Database->Query("DELETE FROM `Comments` WHERE `comment_id` = ?", "s", $this->Id);
+        return true;
     }
 
     public function Edit(){
