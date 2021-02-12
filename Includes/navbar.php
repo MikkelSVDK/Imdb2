@@ -19,6 +19,11 @@
                 <li class="nav-item">
                     <a class="nav-link" style="padding: 1.5rem 0.9rem;" href="/contact.php">Contact</a>
                 </li>
+<?php if($User!=null and $User->IsAdmin()){ ?>
+                <li class="nav-item">
+                    <a class="nav-link" style="padding: 1.5rem 0.9rem;" href="/admin.php">Admin panel</a>
+                </li>
+<?php } ?>
             </ul>
         </ul>
 
