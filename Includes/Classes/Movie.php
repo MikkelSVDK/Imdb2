@@ -89,7 +89,8 @@ class Movie {
     }
 
     public function Delete(){
-        
+        $DeleteResult = $this->Database->Query("DELETE FROM `Moives` WHERE `movie_id` = ?", "s", $this->Id);
+        return true;
     }
 
     public function Edit(){

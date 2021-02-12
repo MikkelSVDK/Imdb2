@@ -72,6 +72,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/profile.php">Profil</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/actions/account/signout.php">Signout</a>
+                </li>
 <?php } ?>
             </ul>
         </ul>
