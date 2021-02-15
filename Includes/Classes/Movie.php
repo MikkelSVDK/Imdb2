@@ -62,6 +62,28 @@ class Movie {
         return $directors;
     }
 
+    public function SetDirectors($directorArray){
+        foreach($directorArray as $director){
+            $writersRelationsResult=$this->Database->Query("SELECT * FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`is_director` = 1", "s", $director);
+            if($writersRelationsResult->num_rows>0) {
+            /*    $writerVariable = $writersRelationsResult->fetch_assoc();
+                if(!$writerVariable["is_director"]) 
+                    $this->Database->Query("UPDATE `MovieWritersRelations` SET `is_director` = 1 WHERE `MovieWritersRelations`.`writer_relation_id` = ?", "s", $writerVariable["writer_relation_id"]);
+            */ } else {
+                
+                $writersResult = $this->Database->Query("SELECT * FROM `MovieWriters` WHERE `writer_name` = ?", "s", $director);
+                if($writersResult->num_rows>0) {
+                    $writerData = $writerResult->fetch_assoc();
+                    $this->Database->Query("INSERT INTO `MovieWritersRelations` (`writer_relation_id`, `writer_id`, `movie_id`, `is_director`) VALUES (NULL, ?, ?, 1)", "ss", $writersData["writer_id"], $this->Id);
+                }   else {
+                    $this->Database->Query("INSERT INTO `MovieWriters` (`writer_id`, `writer_name`) VALUES (NULL, ?)", "s", $director);
+                    $writer_id = $this->Database->GetLastInsertedId();
+                    $this->Database->Query("INSERT INTO `MovieWritersRelations` (`writer_relation_id`, `writer_id`, `movie_id`, `is_director`) VALUES (NULL, ?, ?, 1)", "ss", $writer_id, $this->Id);
+                }
+            }
+        }
+    }
+
     public function GetWriters(){
         $writers = [];
 
@@ -74,7 +96,27 @@ class Movie {
 
         return $writers;
     }
-
+    public function SetWriters($writerArray){
+        foreach($writerArray as $writer){
+            $writersRelationsResult=$this->Database->Query("SELECT * FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`is_director` = 0", "s", $writer);
+            if($writersRelationsResult->num_rows>0) {
+                /*$writerVariable = $writersRelationsResult->fetch_assoc();
+                if($writerVariable["is_director"])
+                    $this->Database->Query("UPDATE `MovieWritersRelations` SET `is_director` = 0 WHERE `MovieWritersRelations`.`writer_relation_id` = ?", "s", $writerVariable["writer_relation_id"]);
+            */ } else {
+                
+                $writersResult = $this->Database->Query("SELECT * FROM `MovieWriters` WHERE `writer_name` = ?", "s", $writer);
+                if($writersResult->num_rows>0) {
+                    $writerData = $writerResult->fetch_assoc();
+                    $this->Database->Query("INSERT INTO `MovieWritersRelations` (`writer_relation_id`, `writer_id`, `movie_id`, `is_director`) VALUES (NULL, ?, ?, 0)", "ss", $writersData["writer_id"], $this->Id);
+                }   else {
+                    $this->Database->Query("INSERT INTO `MovieWriters` (`writer_id`, `writer_name`) VALUES (NULL, ?)", "s", $writer);
+                    $writer_id = $this->Database->GetLastInsertedId();
+                    $this->Database->Query("INSERT INTO `MovieWritersRelations` (`writer_relation_id`, `writer_id`, `movie_id`, `is_director`) VALUES (NULL, ?, ?, 0)", "ss", $writer_id, $this->Id);
+                }
+            }
+        }
+    }
     public function GetStars(){
         $stars = [];
 
@@ -94,6 +136,8 @@ class Movie {
     }
 
     public function Edit(){
+        $EditReult = $this->Database->Query("UPDATE `Moives` SET `movie_title` = ?, `movie_lenght` = ?, `movie_age_rating` = ?, `movie_description` = ?, `movie_release` = ?, `movie_trailer` = ?, `movie_rating` = ? WHERE `movie_id` = ?", "ssssssss", $this->Title, $this->Lenght, $this->AgeRating, $this->Description, $this->Release, $this->TrailerLink, $this->Rating, $this->Id);
+        return true;
         
     }
 
