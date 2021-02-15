@@ -169,7 +169,7 @@ class Movie {
     }
 
     public function Edit(){
-        $EditReult = $this->Database->Query("UPDATE `Moives` SET `movie_title` = ?, `movie_lenght` = ?, `movie_age_rating` = ?, `movie_description` = ?, `movie_release` = ?, `movie_trailer` = ?, `movie_rating` = ? WHERE `movie_id` = ?", "ssssssss", $this->Title, $this->Lenght, $this->AgeRating, $this->Description, $this->Release, $this->TrailerLink, $this->Rating, $this->Id);
+        $EditReult = $this->Database->Query("UPDATE `Moives` SET `movie_title` = ?, `movie_lenght` = ?, `movie_age_rating` = ?, `movie_description` = ?, `movie_release` = ?, `movie_trailer` = ?, `movie_rating` = ? WHERE `movie_id` = ?", "ssssssss", $this->Title, $this->Length, $this->AgeRating, $this->Description, $this->ReleaseDate, $this->TrailerLink, $this->Rating, $this->Id);
         return true;
         
     }
