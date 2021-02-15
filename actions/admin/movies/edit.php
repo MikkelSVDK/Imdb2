@@ -9,7 +9,7 @@ if($User!=null and $User->IsAdmin()){
     $movie->AgeRating = $_POST["AgeRating"];
     $movie->Description = $_POST["Description"];
     $movie->ReleaseDate = $_POST["Release"];
-    $movie->SetImage($_FILES["PostingImg"]);
+    $movie->SetImage($_FILES["PosterImg"]);
     $movie->TrailerLink = $_POST["TrailerLink"];
     $movie->Rating = $_POST["Rating"];
     $movie->SetDirectors(explode(",", $_POST["Director"]));

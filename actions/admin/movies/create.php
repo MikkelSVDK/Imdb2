@@ -12,7 +12,7 @@ if($User!=null and $User->IsAdmin()){
     $movie->Rating = $_POST["Rating"];
     $movie->Create();
 
-    $movie->SetImage($_FILES["PostingImg"]);
+    $movie->SetImage($_FILES["PosterImg"]);
     $movie->SetDirectors(explode(",", $_POST["Director"]));
     $movie->SetWriters(explode(",", $_POST["Writer"]));
     $movie->SetStars(explode(",", $_POST["Stars"]));

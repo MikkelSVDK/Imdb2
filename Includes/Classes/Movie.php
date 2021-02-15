@@ -24,12 +24,17 @@ class Movie {
     }
 
     public function SetImage($file){
-        if(in_array($file["type"], ["images/jpeg","images/jpg"]) === false)
+        if(in_array($file["type"], ["image/jpeg","image/jpg"]) === false)
             throw new Exception("extension not allowed, please choose a JPEG or PNG file.");
-
-        $target_location = realpath($_SERVER["DOCUMENT_ROOT"])."/img/movies/".$this->Id."-".preg_replace("/[^a-zA-Z0-9]+/", "", $this->Title.".jpg");
+        
+        $file_name = $this->Id."-".preg_replace("/[^a-zA-Z0-9]+/", "", $this->Title).".jpg";
+        $target_location = realpath($_SERVER["DOCUMENT_ROOT"])."/img/movies/".$file_name;
         if(!file_exists($target_location))
-            return move_uploaded_file($file["tmp_name"], $target_location);
+            if(move_uploaded_file($file["tmp_name"], $target_location)){
+                $this->Database->Query("INSERT INTO `Images` (`image_id`, `image_location_id`, `image_name`) VALUES (NULL, 2, ?)", "s", $file_name);
+                $image_id = $this->Database->GetLastInsertedId();
+                $this->Database->Query("UPDATE `Moives` SET `image_id` = ? WHERE `movie_id` = ?", "ss", $image_id, $this->Id);
+            }
         return false;
     }
 
