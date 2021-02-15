@@ -1,6 +1,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
+            <a href="/admin.php?action=createmovie" class="btn btn-primary btn-block" Style="background-color:Green">Opret ny film</a>
+            <br>
 <?php
 $movieResult = $Database->Query("SELECT `Moives`.`movie_id` FROM `Moives`");
 while($movieData = $movieResult->fetch_assoc()){

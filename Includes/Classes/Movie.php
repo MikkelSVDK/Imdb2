@@ -201,18 +201,19 @@ class Movie {
     }
 
     public function Delete(){
-        $DeleteResult = $this->Database->Query("DELETE FROM `Moives` WHERE `movie_id` = ?", "s", $this->Id);
+        $deleteResult = $this->Database->Query("DELETE FROM `Moives` WHERE `movie_id` = ?", "s", $this->Id);
         return true;
     }
 
     public function Edit(){
-        $EditReult = $this->Database->Query("UPDATE `Moives` SET `movie_title` = ?, `movie_lenght` = ?, `movie_age_rating` = ?, `movie_description` = ?, `movie_release` = ?, `movie_trailer` = ?, `movie_rating` = ? WHERE `movie_id` = ?", "ssssssss", $this->Title, $this->Length, $this->AgeRating, $this->Description, $this->ReleaseDate, $this->TrailerLink, $this->Rating, $this->Id);
+        $editReult = $this->Database->Query("UPDATE `Moives` SET `movie_title` = ?, `movie_lenght` = ?, `movie_age_rating` = ?, `movie_description` = ?, `movie_release` = ?, `movie_trailer` = ?, `movie_rating` = ? WHERE `movie_id` = ?", "ssssssss", $this->Title, $this->Length, $this->AgeRating, $this->Description, $this->ReleaseDate, $this->TrailerLink, $this->Rating, $this->Id);
         return true;
-        
     }
 
     public function Create(){
-
+        $createReult = $this->Database->Query("INSERT INTO `Moives` (`movie_id`, `movie_title`, `movie_lenght`, `movie_age_rating`, `movie_description`, `movie_release`, `image_id`, `movie_trailer`, `movie_rating`) VALUES (NULL, ?, ?, ?, ?, ?, 1, ?, ?)", "sssssss", $this->Title, $this->Length, $this->AgeRating, $this->Description, $this->ReleaseDate, $this->TrailerLink, $this->Rating);
+        $this->Id = $this->Database->GetLastInsertedId();
+        return true;
     }
 
     public function Get($id){

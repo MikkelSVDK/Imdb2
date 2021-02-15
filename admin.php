@@ -22,9 +22,11 @@ if($User==null or !$User->IsAdmin()){
 include("includes/navbar.php");
 
 if($action == "main")
-  include("includes/admin/main.php");
+    include("includes/admin/main.php");
+else if($action == "createmovie")
+    include("includes/admin/createmovie.php");
 else if($action == "editmovie")
-  include("includes/admin/editmovie.php");
+    include("includes/admin/editmovie.php");
 
 include("includes/footer.php");
 ?>
