@@ -1,66 +1,73 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
-            <?php
-                $movieResult = $Database->Query("SELECT `Moives`.`movie_id` FROM `Moives`");
-                while($movieData = $movieResult->fetch_assoc()){
-                    $Movie = new Movie($Database);
-                    $Movie->Get($movieData["movie_id"]);
-            ?>
-                <div class="col-lg-6">
-                    <div class="movie-overlay">
-                        <div class="btn-group-vertical">
-                            <a href="/actions/admin/movies/delete.php?id=<?=$Movie->Id?>" class="btn btn-primary" Style="background-color:Red">Remove</a>
-                            <button type="button" class="btn btn-primary" Style="background-color:Green">Edit</button>
-                        </div>
+<?php
+$movieResult = $Database->Query("SELECT `Moives`.`movie_id` FROM `Moives`");
+while($movieData = $movieResult->fetch_assoc()){
+    $Movie = new Movie($Database);
+    $Movie->Get($movieData["movie_id"]);
+?>
+                <div class="row">
+                    <div class="col-8">
+                    <img class="img-fluid" src="<?= $Movie->GetImage() ?>">
                     </div>
-                    <img class="movie-img img-fluid" src="<?= $Movie->GetImage() ?>">
+                    <div class="col-4">
+                        <center>
+                            <a href="/actions/admin/movies/delete.php?id=<?=$Movie->Id?>" class="btn btn-primary" Style="background-color:Red;margin-bottom:5px">Remove</a>
+                            <a href="/admin.php?action=editmovie&id=<?=$Movie->Id?>" class="btn btn-primary" Style="background-color:Green">Edit</a>
+                        </center>
+                    </div>
                 </div>
-            <?php
-                }
-            ?>
+                <hr>
+<?php
+}
+?>
             </div>
             <div class="col-lg-4">
-            <?php
-            $commentResult = $Database->Query("SELECT `Comments`.`comment_id` FROM `Comments`");
-                while($CommentData = $commentResult->fetch_assoc()){
-                    $Comment = new Comment($Database);
-                    $Comment->Get($CommentData["comment_id"]);
-            ?>
-                <div class="col-lg-6">
-                    <div class="comment-overlay">
-                        <div class="btn-group-vertical">
-                            <a href="/actions/admin/Comment/delete.php?id=<?=$Comment->Id?>" class="btn btn-primary" Style="background-color:Red">Remove</a>
-                            <button type="button" class="btn btn-primary" Style="background-color:Green">Edit</button>
-                        </div>
+<?php
+$commentResult = $Database->Query("SELECT `News`.`news_id` FROM `News`");
+while($CommentData = $commentResult->fetch_assoc()){
+    $News = new News($Database);
+    $News->Get($CommentData["news_id"]);
+?>
+                <div class="row">
+                    <div class="col-8">
+                        <h5><?= $News->Title ?></h5><p><?= $News->Description ?><br><b><?= $News->GetUser()->Firstname." ".date("d-m-Y", strtotime($News->Date)) ?></b>
                     </div>
-                    <a><?= $Comment->Text." ".$Comment->GetUser()->Firstname." ".$Comment->Date ?>
-                    <hr />
+                    <div class="col-4">
+                        <center>
+                            <a href="/actions/admin/news/delete.php?id=<?=$News->Id?>" class="btn btn-primary" Style="background-color:Red;margin-bottom:5px">Remove</a>
+                            <a href="/admin.php?action=editnews&id=<?=$News->Id?>" class="btn btn-primary" Style="background-color:Green">Edit</a>
+                        </center>
+                    </div>
                 </div>
-                <?php
-                }
-                ?>
+                <hr>
+<?php
+}
+?>
             </div>
             <div class="col-lg-4">
-            <?php
-                $userResult = $Database->Query("SELECT `Users`.`user_id` FROM `Users`");
-                while($userData = $userResult->fetch_assoc()){
-                    $User = new User($Database);
-                    $User->Get($userData["user_id"]);
-            ?>
-                <div class="col-lg-12">
-                    <div class="user-overlay">
-                        <div class="btn-group-vertical">
-                            <a href="/actions/admin/user/delete.php?id=<?=$User->Id?>" class="btn btn-primary" Style="background-color:Red">Remove</a>
-                            <button type="button" class="btn btn-primary" Style="background-color:Green">Edit</button>
-                        </div>
+<?php
+$userResult = $Database->Query("SELECT `Users`.`user_id` FROM `Users`");
+while($userData = $userResult->fetch_assoc()){
+    $User = new User($Database);
+    $User->Get($userData["user_id"]);
+?>
+                <div class="row">
+                    <div class="col-8">
+                        <?= $User->Firstname." ".$User->Lastname ?>
                     </div>
-                    <a><?= $User->Firstname." ".$User->Lastname ?>
-                    <hr />
+                    <div class="col-4">
+                        <center>
+                            <a href="/actions/admin/user/delete.php?id=<?=$User->Id?>" class="btn btn-primary" Style="background-color:Red;margin-bottom:5px">Remove</a>
+                            <a href="/admin.php?action=edituser&id=<?=$User->Id?>" class="btn btn-primary" Style="background-color:Green">Edit</a>
+                        </center>
+                    </div>
                 </div>
-                <?php
-                }
-                ?>
+                <hr>
+<?php
+}
+?>
             </div>
         </div>
     </div>
