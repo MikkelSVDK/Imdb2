@@ -49,6 +49,32 @@ class Movie {
         return $genres;
     }
 
+    public function SetGenres($genreArray){
+        $currentGenres = $this->GetGenres();
+
+        foreach($genreArray as $genre){
+            if(($key = array_search($director, array_map(function($d){ return $d->Name; }, $currentGenres))) !== FALSE)
+                unset($currentGenres[$key]);
+
+            $genresRelationsResult = $this->Database->Query("SELECT * FROM `MovieGenresRelations` JOIN `MovieGenres` ON `MovieGenres`.`genre_id` = `MovieGenresRelations`.`genre_id` WHERE `MovieGenres`.`genre_name` = ? AND `MovieGenresRelations`.`movie_id` = ?", "ss", $genre, $this->Id);
+            if($genresRelationsResult->num_rows == 0) {
+                $genreResult = $this->Database->Query("SELECT * FROM `MovieGenres` WHERE `genre_name` = ?", "s", $genre);
+                if($genreResult->num_rows > 0) {
+                    $genreData = $genreResult->fetch_assoc();
+                    $this->Database->Query("INSERT INTO `MovieGenresRelations` (`genre_relation_id`, `genre_id`, `movie_id`) VALUES (NULL, ?, ?)", "ss", $genreData["genre_id"], $this->Id);
+                } else {
+                    $this->Database->Query("INSERT INTO `MovieGenres` (`genre_id`, `genre_name`) VALUES (NULL, ?)", "s", $genre);
+                    $genre_id = $this->Database->GetLastInsertedId();
+                    $this->Database->Query("INSERT INTO `MovieGenresRelations` (`genre_relation_id`, `genre_id`, `movie_id`) VALUES (NULL, ?, ?)", "ss", $genre_id, $this->Id);
+                }
+            }
+        }
+
+        foreach($currentGenres as $genre){
+            $this->Database->Query("DELETE `MovieGenresRelations`, `MovieGenresRelations` FROM `MovieGenresRelations` INNER JOIN `MovieGenres` ON `MovieGenres`.`genre_id` = `MovieGenresRelations`.`genre_id` WHERE `MovieGenres`.`genre_name` = ? AND `MovieGenresRelations`.`movie_id` = ?", "ss", $genre->Name, $this->Id);
+        }
+    }
+
     public function GetDirectors(){
         $directors = [];
 
@@ -66,10 +92,11 @@ class Movie {
         $currentDirectors = $this->GetDirectors();
 
         foreach($directorArray as $director){
-            unset($currentDirectors[$director]);
+            if(($key = array_search($director, array_map(function($d){ return $d->Name; }, $currentDirectors))) !== FALSE)
+                unset($currentDirectors[$key]);
 
             $writersRelationsResult=$this->Database->Query("SELECT * FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`movie_id` = ? AND `MovieWritersRelations`.`is_director` = 1", "ss", $director, $this->Id);
-            if($writersRelationsResult->num_rows >! 0) {
+            if($writersRelationsResult->num_rows == 0) {
                 $writersResult = $this->Database->Query("SELECT * FROM `MovieWriters` WHERE `writer_name` = ?", "s", $director);
                 if($writersResult->num_rows > 0) {
                     $writerData = $writersResult->fetch_assoc();
@@ -83,7 +110,7 @@ class Movie {
         }
 
         foreach($currentDirectors as $director){
-            $this->Database->Query("DELETE FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`movie_id` = ? AND `MovieWritersRelations`.`is_director` = 1", "ss", $director, $this->Id);
+            $this->Database->Query("DELETE `MovieWritersRelations`, `MovieWriters` FROM `MovieWritersRelations` INNER JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`movie_id` = ? AND `MovieWritersRelations`.`is_director` = 1", "ss", $director->Name, $this->Id);
         }
     }
 
@@ -104,10 +131,11 @@ class Movie {
         $currentWriters = $this->GetWriters();
 
         foreach($writerArray as $writer){
-            unset($currentWriters[$writer]);
-
+            if(($key = array_search($writer, array_map(function($d){ return $d->Name; }, $currentWriters))) !== FALSE)
+                unset($currentWriters[$key]);
+            
             $writersRelationsResult=$this->Database->Query("SELECT * FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`movie_id` = ? AND `MovieWritersRelations`.`is_director` = 0", "ss", $writer, $this->Id);
-            if($writersRelationsResult->num_rows >! 0) {
+            if($writersRelationsResult->num_rows == 0) {
                 $writersResult = $this->Database->Query("SELECT * FROM `MovieWriters` WHERE `writer_name` = ?", "s", $writer);
                 if($writersResult->num_rows > 0) {
                     $writerData = $writersResult->fetch_assoc();
@@ -121,7 +149,7 @@ class Movie {
         }
 
         foreach($currentWriters as $writer){
-            $this->Database->Query("DELETE FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`movie_id` = ? AND `MovieWritersRelations`.`is_director` = 0", "ss", $writer, $this->Id);
+            $this->Database->Query("DELETE `MovieWritersRelations`, `MovieWriters` FROM `MovieWritersRelations` INNER JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`movie_id` = ? AND `MovieWritersRelations`.`is_director` = 0", "ss", $writer->Name, $this->Id);
         }
     }
 
@@ -142,10 +170,11 @@ class Movie {
         $currentStars = $this->GetStars();
 
         foreach($starArray as $star){
-            unset($currentStars[$star]);
+            if(($key = array_search($star, array_map(function($d){ return $d->Name; }, $currentStars))) !== FALSE)
+                unset($currentStars[$key]);
 
             $starsRelationsResult = $this->Database->Query("SELECT * FROM `MovieStarsRelations` JOIN `MovieStars` ON `MovieStars`.`star_id` = `MovieStarsRelations`.`star_id` WHERE `MovieStars`.`star_name` = ? AND `MovieStarsRelations`.`movie_id` = ?", "ss", $star, $this->Id);
-            if($starsRelationsResult->num_rows >! 0) {
+            if($starsRelationsResult->num_rows == 0) {
                 $starsResult = $this->Database->Query("SELECT * FROM `MovieStars` WHERE `star_name` = ?", "s", $star);
                 if($starsResult->num_rows > 0) {
                     $starData = $starsResult->fetch_assoc();
@@ -159,7 +188,7 @@ class Movie {
         }
 
         foreach($currentStars as $star){
-            $this->Database->Query("DELETE FROM `MovieStarsRelations` JOIN `MovieStars` ON `MovieStars`.`star_id` = `MovieStarsRelations`.`star_id` WHERE `MovieStars`.`star_name` = ? AND `MovieStarsRelations`.`movie_id` = ?", "ss", $star, $this->Id);
+            $this->Database->Query("DELETE `MovieStarsRelations`, `MovieStars` FROM `MovieStarsRelations` INNER JOIN `MovieStars` ON `MovieStars`.`star_id` = `MovieStarsRelations`.`star_id` WHERE `MovieStars`.`star_name` = ? AND `MovieStarsRelations`.`movie_id` = ?", "ss", $star->Name, $this->Id);
         }
     }
 
