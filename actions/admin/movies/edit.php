@@ -19,8 +19,6 @@ if($User!=null and $User->IsAdmin()){
     $movie->SetStars(explode(",", $_POST["Stars"]));
     $movie->SetGenres(explode(",", $_POST["Genres"]));
     $movie->Edit();
-
-    //We love Mikkel
     
     
 }

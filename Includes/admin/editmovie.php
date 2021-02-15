@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label class="col-form-label" for="inputDefault">Genre</label>
                 <input name="Genres" type="text" class="form-control" value="<?= implode(", ", array_map(function($d){ return $d->Name; }, $movie->GetGenres() ?: [])) ?>" id="inputDefault">
-            </div>
+            </div> 
             <div class="btn-group-vertical">
                 <button type="Submit" class="btn btn-primary">Submit</button>
             </div>
