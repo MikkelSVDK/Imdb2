@@ -53,7 +53,7 @@ class Movie {
         $currentGenres = $this->GetGenres();
 
         foreach($genreArray as $genre){
-            if(($key = array_search($director, array_map(function($d){ return $d->Name; }, $currentGenres))) !== FALSE)
+            if(($key = array_search($genre, array_map(function($d){ return $d->Name; }, $currentGenres))) !== FALSE)
                 unset($currentGenres[$key]);
 
             if(!empty($genre)){
