@@ -63,24 +63,27 @@ class Movie {
     }
 
     public function SetDirectors($directorArray){
+        $currentDirectors = $this->GetDirectors();
+
         foreach($directorArray as $director){
-            $writersRelationsResult=$this->Database->Query("SELECT * FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`is_director` = 1", "s", $director);
-            if($writersRelationsResult->num_rows>0) {
-            /*    $writerVariable = $writersRelationsResult->fetch_assoc();
-                if(!$writerVariable["is_director"]) 
-                    $this->Database->Query("UPDATE `MovieWritersRelations` SET `is_director` = 1 WHERE `MovieWritersRelations`.`writer_relation_id` = ?", "s", $writerVariable["writer_relation_id"]);
-            */ } else {
-                
+            unset($currentDirectors[$director]);
+
+            $writersRelationsResult=$this->Database->Query("SELECT * FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`movie_id` = ? AND `MovieWritersRelations`.`is_director` = 1", "ss", $director, $this->Id);
+            if($writersRelationsResult->num_rows >! 0) {
                 $writersResult = $this->Database->Query("SELECT * FROM `MovieWriters` WHERE `writer_name` = ?", "s", $director);
-                if($writersResult->num_rows>0) {
-                    $writerData = $writerResult->fetch_assoc();
+                if($writersResult->num_rows > 0) {
+                    $writerData = $writersResult->fetch_assoc();
                     $this->Database->Query("INSERT INTO `MovieWritersRelations` (`writer_relation_id`, `writer_id`, `movie_id`, `is_director`) VALUES (NULL, ?, ?, 1)", "ss", $writersData["writer_id"], $this->Id);
-                }   else {
+                } else {
                     $this->Database->Query("INSERT INTO `MovieWriters` (`writer_id`, `writer_name`) VALUES (NULL, ?)", "s", $director);
                     $writer_id = $this->Database->GetLastInsertedId();
                     $this->Database->Query("INSERT INTO `MovieWritersRelations` (`writer_relation_id`, `writer_id`, `movie_id`, `is_director`) VALUES (NULL, ?, ?, 1)", "ss", $writer_id, $this->Id);
                 }
             }
+        }
+
+        foreach($currentDirectors as $director){
+            $this->Database->Query("DELETE FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`movie_id` = ? AND `MovieWritersRelations`.`is_director` = 1", "ss", $director, $this->Id);
         }
     }
 
@@ -96,27 +99,32 @@ class Movie {
 
         return $writers;
     }
+
     public function SetWriters($writerArray){
+        $currentWriters = $this->GetWriters();
+
         foreach($writerArray as $writer){
-            $writersRelationsResult=$this->Database->Query("SELECT * FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`is_director` = 0", "s", $writer);
-            if($writersRelationsResult->num_rows>0) {
-                /*$writerVariable = $writersRelationsResult->fetch_assoc();
-                if($writerVariable["is_director"])
-                    $this->Database->Query("UPDATE `MovieWritersRelations` SET `is_director` = 0 WHERE `MovieWritersRelations`.`writer_relation_id` = ?", "s", $writerVariable["writer_relation_id"]);
-            */ } else {
-                
+            unset($currentWriters[$writer]);
+
+            $writersRelationsResult=$this->Database->Query("SELECT * FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`movie_id` = ? AND `MovieWritersRelations`.`is_director` = 0", "ss", $writer, $this->Id);
+            if($writersRelationsResult->num_rows >! 0) {
                 $writersResult = $this->Database->Query("SELECT * FROM `MovieWriters` WHERE `writer_name` = ?", "s", $writer);
-                if($writersResult->num_rows>0) {
-                    $writerData = $writerResult->fetch_assoc();
+                if($writersResult->num_rows > 0) {
+                    $writerData = $writersResult->fetch_assoc();
                     $this->Database->Query("INSERT INTO `MovieWritersRelations` (`writer_relation_id`, `writer_id`, `movie_id`, `is_director`) VALUES (NULL, ?, ?, 0)", "ss", $writersData["writer_id"], $this->Id);
-                }   else {
+                } else {
                     $this->Database->Query("INSERT INTO `MovieWriters` (`writer_id`, `writer_name`) VALUES (NULL, ?)", "s", $writer);
                     $writer_id = $this->Database->GetLastInsertedId();
                     $this->Database->Query("INSERT INTO `MovieWritersRelations` (`writer_relation_id`, `writer_id`, `movie_id`, `is_director`) VALUES (NULL, ?, ?, 0)", "ss", $writer_id, $this->Id);
                 }
             }
         }
+
+        foreach($currentWriters as $writer){
+            $this->Database->Query("DELETE FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`movie_id` = ? AND `MovieWritersRelations`.`is_director` = 0", "ss", $writer, $this->Id);
+        }
     }
+
     public function GetStars(){
         $stars = [];
 
@@ -128,6 +136,31 @@ class Movie {
         }
 
         return $stars;
+    }
+
+    public function SetStars($starArray){
+        $currentStars = $this->GetStars();
+
+        foreach($starArray as $star){
+            unset($currentStars[$star]);
+
+            $starsRelationsResult = $this->Database->Query("SELECT * FROM `MovieStarsRelations` JOIN `MovieStars` ON `MovieStars`.`star_id` = `MovieStarsRelations`.`star_id` WHERE `MovieStars`.`star_name` = ? AND `MovieStarsRelations`.`movie_id` = ?", "ss", $star, $this->Id);
+            if($starsRelationsResult->num_rows >! 0) {
+                $starsResult = $this->Database->Query("SELECT * FROM `MovieStars` WHERE `star_name` = ?", "s", $star);
+                if($starsResult->num_rows > 0) {
+                    $starData = $starsResult->fetch_assoc();
+                    $this->Database->Query("INSERT INTO `MovieStarsRelations` (`star_relation_id`, `star_id`, `movie_id`) VALUES (NULL, ?, ?)", "ss", $starData["star_id"], $this->Id);
+                } else {
+                    $this->Database->Query("INSERT INTO `MovieStars` (`star_id`, `star_name`) VALUES (NULL, ?)", "s", $star);
+                    $star_id = $this->Database->GetLastInsertedId();
+                    $this->Database->Query("INSERT INTO `MovieStarsRelations` (`star_relation_id`, `star_id`, `movie_id`) VALUES (NULL, ?, ?)", "ss", $star_id, $this->Id);
+                }
+            }
+        }
+
+        foreach($currentStars as $star){
+            $this->Database->Query("DELETE FROM `MovieStarsRelations` JOIN `MovieStars` ON `MovieStars`.`star_id` = `MovieStarsRelations`.`star_id` WHERE `MovieStars`.`star_name` = ? AND `MovieStarsRelations`.`movie_id` = ?", "ss", $star, $this->Id);
+        }
     }
 
     public function Delete(){
