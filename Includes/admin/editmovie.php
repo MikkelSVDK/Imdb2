@@ -4,6 +4,7 @@
     ?>
     <div class="container">
         <form name="form" method="post" action="actions/admin/movies/edit.php">
+            <input type="hidden" name="id" value="<?= $movie->Id ?>">
             <h3><b>Movie</b></h3>
             <div class="form-group">
                 <label class="col-form-label" for="inputDefault">Title</label>
