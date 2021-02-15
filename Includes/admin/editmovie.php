@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label class="col-form-label" for="inputDefault">Description</label>
-                <textare name="Description" class="form-control" id="inputDefault" style="height:unset" rows="3"><?= $movie->Description ?></textarea>
+                <textarea name="Description" class="form-control" id="inputDefault" rows="3"><?= $movie->Description ?></textarea>
             </div>
             <div class="form-group">
                 <label class="col-form-label" for="inputDefault">Releasedate</label>
