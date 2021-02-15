@@ -3,7 +3,7 @@
         $movie->Get($_GET["id"]);
     ?>
     <div class="container">
-        <form name="form" method="post" action="actions/admin/movies/edit.php">
+        <form name="form" method="post" action="actions/admin/movies/edit.php" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?= $movie->Id ?>">
             <h3><b>Movie</b></h3>
             <div class="form-group">

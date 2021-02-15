@@ -1,5 +1,5 @@
     <div class="container">
-        <form name="form" method="post" action="actions/admin/movies/create.php">
+        <form name="form" method="post" action="actions/admin/movies/create.php" enctype="multipart/form-data">
             <h3><b>Movie</b></h3>
             <div class="form-group">
                 <label class="col-form-label" for="inputDefault">Title</label>
