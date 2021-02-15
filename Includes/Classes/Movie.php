@@ -56,7 +56,7 @@ class Movie {
             if(($key = array_search($director, array_map(function($d){ return $d->Name; }, $currentGenres))) !== FALSE)
                 unset($currentGenres[$key]);
 
-            if(!empty($genre){
+            if(!empty($genre)){
                 $genresRelationsResult = $this->Database->Query("SELECT * FROM `MovieGenresRelations` JOIN `MovieGenres` ON `MovieGenres`.`genre_id` = `MovieGenresRelations`.`genre_id` WHERE `MovieGenres`.`genre_name` = ? AND `MovieGenresRelations`.`movie_id` = ?", "ss", $genre, $this->Id);
                 if($genresRelationsResult->num_rows == 0) {
                     $genreResult = $this->Database->Query("SELECT * FROM `MovieGenres` WHERE `genre_name` = ?", "s", $genre);
@@ -97,7 +97,7 @@ class Movie {
             if(($key = array_search($director, array_map(function($d){ return $d->Name; }, $currentDirectors))) !== FALSE)
                 unset($currentDirectors[$key]);
 
-            if(!empty($director){
+            if(!empty($director)){
                 $writersRelationsResult=$this->Database->Query("SELECT * FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`movie_id` = ? AND `MovieWritersRelations`.`is_director` = 1", "ss", $director, $this->Id);
                 if($writersRelationsResult->num_rows == 0) {
                     $writersResult = $this->Database->Query("SELECT * FROM `MovieWriters` WHERE `writer_name` = ?", "s", $director);
@@ -138,7 +138,7 @@ class Movie {
             if(($key = array_search($writer, array_map(function($d){ return $d->Name; }, $currentWriters))) !== FALSE)
                 unset($currentWriters[$key]);
             
-            if(!empty($writer){
+            if(!empty($writer)){
                 $writersRelationsResult=$this->Database->Query("SELECT * FROM `MovieWritersRelations` JOIN `MovieWriters` ON `MovieWriters`.`writer_id` = `MovieWritersRelations`.`writer_id` WHERE `MovieWriters`.`writer_name` = ? AND `MovieWritersRelations`.`movie_id` = ? AND `MovieWritersRelations`.`is_director` = 0", "ss", $writer, $this->Id);
                 if($writersRelationsResult->num_rows == 0) {
                     $writersResult = $this->Database->Query("SELECT * FROM `MovieWriters` WHERE `writer_name` = ?", "s", $writer);
@@ -179,7 +179,7 @@ class Movie {
             if(($key = array_search($star, array_map(function($d){ return $d->Name; }, $currentStars))) !== FALSE)
                 unset($currentStars[$key]);
 
-            if(!empty($star){
+            if(!empty($star)){
                 $starsRelationsResult = $this->Database->Query("SELECT * FROM `MovieStarsRelations` JOIN `MovieStars` ON `MovieStars`.`star_id` = `MovieStarsRelations`.`star_id` WHERE `MovieStars`.`star_name` = ? AND `MovieStarsRelations`.`movie_id` = ?", "ss", $star, $this->Id);
                 if($starsRelationsResult->num_rows == 0) {
                     $starsResult = $this->Database->Query("SELECT * FROM `MovieStars` WHERE `star_name` = ?", "s", $star);
