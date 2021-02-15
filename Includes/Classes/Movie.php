@@ -103,7 +103,7 @@ class Movie {
                     $writersResult = $this->Database->Query("SELECT * FROM `MovieWriters` WHERE `writer_name` = ?", "s", $director);
                     if($writersResult->num_rows > 0) {
                         $writerData = $writersResult->fetch_assoc();
-                        $this->Database->Query("INSERT INTO `MovieWritersRelations` (`writer_relation_id`, `writer_id`, `movie_id`, `is_director`) VALUES (NULL, ?, ?, 1)", "ss", $writersData["writer_id"], $this->Id);
+                        $this->Database->Query("INSERT INTO `MovieWritersRelations` (`writer_relation_id`, `writer_id`, `movie_id`, `is_director`) VALUES (NULL, ?, ?, 1)", "ss", $writerData["writer_id"], $this->Id);
                     } else {
                         $this->Database->Query("INSERT INTO `MovieWriters` (`writer_id`, `writer_name`) VALUES (NULL, ?)", "s", $director);
                         $writer_id = $this->Database->GetLastInsertedId();
@@ -144,7 +144,7 @@ class Movie {
                     $writersResult = $this->Database->Query("SELECT * FROM `MovieWriters` WHERE `writer_name` = ?", "s", $writer);
                     if($writersResult->num_rows > 0) {
                         $writerData = $writersResult->fetch_assoc();
-                        $this->Database->Query("INSERT INTO `MovieWritersRelations` (`writer_relation_id`, `writer_id`, `movie_id`, `is_director`) VALUES (NULL, ?, ?, 0)", "ss", $writersData["writer_id"], $this->Id);
+                        $this->Database->Query("INSERT INTO `MovieWritersRelations` (`writer_relation_id`, `writer_id`, `movie_id`, `is_director`) VALUES (NULL, ?, ?, 0)", "ss", $writerData["writer_id"], $this->Id);
                     } else {
                         $this->Database->Query("INSERT INTO `MovieWriters` (`writer_id`, `writer_name`) VALUES (NULL, ?)", "s", $writer);
                         $writer_id = $this->Database->GetLastInsertedId();
