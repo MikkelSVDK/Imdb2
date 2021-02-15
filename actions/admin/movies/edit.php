@@ -14,12 +14,12 @@ if($User!=null and $User->IsAdmin()){
     */
     $movie->TrailerLink = $_POST["TrailerLink"];
     $movie->Rating = $_POST["Rating"];
-    /*
-    $movie->SetDirectors() = $_POST["Director"];
-    $movie->SetWriters() = $_POST["Writer"];
-    $movie->SetStars() = $_POST["Stars"];
-    */
+    $movie->SetDirectors(explode(",", $_POST["Director"]));
+    $movie->SetWriters(explode(",", $_POST["Writer"]));
+    $movie->SetStars(explode(",", $_POST["Stars"]));
     $movie->Edit();
+
+    //We love Mikkel
     
     
 }
