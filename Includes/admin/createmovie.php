@@ -50,7 +50,7 @@
                 <input name="Genres" type="text" class="form-control" id="inputDefault">
             </div> 
             <div class="btn-group-vertical">
-                <button type="Submit" class="btn btn-primary">Opret film</button>
+                <button type="Submit" class="btn btn-primary">Create film</button>
             </div>
         </form>
     </div>
