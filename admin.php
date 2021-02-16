@@ -27,6 +27,12 @@ else if($action == "createmovie")
     include("includes/admin/createmovie.php");
 else if($action == "editmovie")
     include("includes/admin/editmovie.php");
+else if($action == "createnews")
+    include("includes/admin/createnews.php");
+else if($action == "editnews")
+include("includes/admin/editnews.php");
+else if($action == "edituser")
+    include("includes/admin/edituser.php");
 
 include("includes/footer.php");
 ?>

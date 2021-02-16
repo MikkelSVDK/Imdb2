@@ -26,6 +26,8 @@ while($movieData = $movieResult->fetch_assoc()){
 ?>
             </div>
             <div class="col-lg-4">
+            <a href="/admin.php?action=createnews" class="btn btn-primary btn-block" Style="background-color:Green">Opret nyhed</a>
+            <br>
 <?php
 $commentResult = $Database->Query("SELECT `News`.`news_id` FROM `News`");
 while($CommentData = $commentResult->fetch_assoc()){
