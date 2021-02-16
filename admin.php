@@ -30,9 +30,11 @@ else if($action == "editmovie")
 else if($action == "createnews")
     include("includes/admin/createnews.php");
 else if($action == "editnews")
-include("includes/admin/editnews.php");
+    include("includes/admin/editnews.php");
 else if($action == "edituser")
     include("includes/admin/edituser.php");
+else if($action == "seetickets")
+    include("includes/admin/seetickets.php");
 
 include("includes/footer.php");
 ?>
