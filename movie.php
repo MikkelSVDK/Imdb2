@@ -10,6 +10,7 @@ $Movie->Get($_GET["id"]);
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         <link rel="stylesheet" href="/css/custom.css">
         <link rel="stylesheet" href="https://mcskri.pt/css/sticky-footer.css">
+        <link rel="stylesheet" href="https://mcskri.pt/css/star-rating.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     </head>
     <body>
@@ -73,13 +74,16 @@ $Movie->Get($_GET["id"]);
             <p><?= $Movie->Description ?></p>
             <h5><b>Post a comment</b></h5>
 <?php if($User != null) { ?>
-                <div class="form-group">
-                    <form action="/actions/comments/create.php" method="POST">
-                        <input type="hidden" name="movie_id" value="<?= $Movie->Id ?>">
+                <form action="/actions/comments/create.php" method="POST">
+                    <input type="hidden" name="movie_id" value="<?= $Movie->Id ?>">
+                    <div class="form-group">
+                        <input id="stars" name="rating" class="rating rating-loading" data-show-clear="false" data-show-caption="false" value="" data-min="0" data-max="5" data-step="1" data-size="xs">
+                    </div>
+                    <div class="form-group">
                         <textarea name="comment" class="form-control" placeholder="Write you comment here" rows="3"></textarea>
                         <input type="submit" value="Send comment">
-                    </form>
-                </div>
+                    </div>
+                </form>
 <?php } else { ?>
                 <div class="form-group">    
                     <textarea class="form-control" placeholder="You can't write a comment. You need to login first" rows="3" disabled></textarea>
@@ -92,6 +96,11 @@ foreach($Movie->GetComments() as $comment){
 ?>
             <blockquote class="blockquote">
                 <header class="blockquote-footer"><?= $commentUser->Firstname." ".$commentUser->Lastname ?> <cite title="Source Title"><?= date("d-m-Y", strtotime($comment->Date)) ?></cite></header>
+<?php for ($i = 0; $i < 5; $i++) { if($comment->Rating > $i){ ?>
+                <i class="fas fa-star"></i>
+<?php }else{ ?>
+                <i class="far fa-star"></i>
+<?php }} ?>
                 <p class="mb-0"><?= $comment->Text ?></p>
 <?php if(($User != null && $User->IsAdmin()) || ($User != null && $commentUser->Id == $User->Id)){ ?>
                 <br>
@@ -106,4 +115,5 @@ foreach($Movie->GetComments() as $comment){
     </body>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="https://mcskri.pt/js/star-rating.js"></script>
 </html>

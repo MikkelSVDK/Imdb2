@@ -3,7 +3,7 @@ require(realpath($_SERVER["DOCUMENT_ROOT"])."/includes/core.php");
 
 if($User != null) {
     $Comment = new Comment($Database);
-    $Comment->Rating = 1;
+    $Comment->Rating = $_POST["rating"];
     $Comment->Text = $_POST["comment"];
 
     $Comment->Create($User->Id, $_POST["movie_id"]);
