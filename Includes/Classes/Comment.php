@@ -19,6 +19,16 @@ class Comment {
         
         return $user;
     }
+
+    public function GetMovie(){
+        $commentResult = $this->Database->Query("SELECT `movie_id` FROM `Comments` WHERE `comment_id` = ?", "s", $this->Id);
+        $commentData = $commentResult->fetch_assoc();
+
+        $movie = new Movie($this->Database);
+        $movie->Get($commentData["movie_id"]);
+        
+        return $movie;
+    }
     
     public function Delete(){
         $DeleteResult = $this->Database->Query("DELETE FROM `Comments` WHERE `comment_id` = ?", "s", $this->Id);

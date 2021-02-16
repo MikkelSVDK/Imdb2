@@ -1,10 +1,15 @@
         <div class="container">
+            <a href="/profile.php?action=comments" class="btn btn-primary">See all comments</a>
+            <br><br>
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="form-group">
-                        <img class="img-fluid" src="/img/<?= $User->GetImage() ?>" alt="">
-                        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-                    </div>
+                    <form name="form" method="post" action="actions/profile/updateimg.php" enctype="multipart/form-data">
+                        <input type="hidden" name="id" value="<?= $User->Id ?>" />
+                        <div class="form-group">
+                            <img class="img-fluid" src="/img/<?= $User->GetImage() ?>" alt="">
+                            <input type="file" name="img" class="form-control-file" onchange="form.submit()">
+                        </div>
+                    </form>
                 </div>
                 <div class="col-lg-6">
                     <form action="/actions/profile/updateinfo.php" method="POST">

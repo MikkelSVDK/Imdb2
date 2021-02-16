@@ -30,6 +30,21 @@ class User {
         return $imageData["image"];
     }
 
+    public function SetImage($file){
+        if(in_array($file["type"], ["image/jpeg","image/jpg"]) === false)
+            throw new Exception("extension not allowed, please choose a JPEG or PNG file.");
+        
+        $file_name = $this->Id."-".time().".jpg";
+        $target_location = realpath($_SERVER["DOCUMENT_ROOT"])."/img/users/".$file_name;
+        if(!file_exists($target_location))
+            if(move_uploaded_file($file["tmp_name"], $target_location)){
+                $this->Database->Query("INSERT INTO `Images` (`image_id`, `image_location_id`, `image_name`) VALUES (NULL, 1, ?)", "s", $file_name);
+                $image_id = $this->Database->GetLastInsertedId();
+                $this->Database->Query("UPDATE `Users` SET `image_id` = ? WHERE `user_id` = ?", "ss", $image_id, $this->Id);
+            }
+        return false;
+    }
+
     public function IsSignedIn(){
         return $this->Id != null;
     }
