@@ -25,7 +25,7 @@ while($newsData = $newsResult->fetch_assoc()){
                     <b><?= date("d-m-Y", strtotime($News->Date)) ?></b>
                     <h5><?= $News->Title ?></h5>
                     <p><small><?= $NewsUser->Firstname." ".$NewsUser->Lastname ?></small></p>
-                    <p><?= $News->Description ?></p>
+                    <p><?= nl2br($News->Description) ?></p>
                 </a> 
             </div>
 <?php 

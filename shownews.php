@@ -1,4 +1,10 @@
-<?php require("includes/core.php"); ?>
+<?php
+require("includes/core.php");
+
+$news = new News($Database);
+$news->Get($_GET["id"]);
+$newsUser = $news->GetUser();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,10 +17,10 @@
     <body>
 <?php include("includes/navbar.php"); ?>
         <div class = "container">
-            <h4>Det her er dine top nyheder</h4>
-            <b>25-01-2021</b>
-            <p><small>Denne artikel er skrevet at xXxSupermanHater69420xXx</small></p>
-            <p>Her er en mere uddybbende historie på hvorfor superman ikke er en superhelt men en normal person som drømmer det hele</p>
+            <h4><?= $news->Title ?></h4>
+            <b><?= date("d-m-Y", strtotime($news->Date)) ?></b>
+            <p><small>Written by <?= $newsUser->Firstname." ".$newsUser->Lastname ?></small></p>
+            <p><?= nl2br($news->Description) ?></p>
             <a href="news.php">Gå tilbage</a> 
         </div>
 <?php include("includes/footer.php"); ?>

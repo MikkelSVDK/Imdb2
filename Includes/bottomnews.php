@@ -7,12 +7,14 @@ $newsResult = $Database->Query("SELECT * FROM `News` ORDER BY `news_date` DESC L
 while($newsData = $newsResult->fetch_assoc()){
   $News = new News($Database);
   $News->Get($newsData["news_id"]);
-?>
-                    <div class="news">
-                        <small><?= date("d.m.Y", strtotime($News->Date)) ?></small>
-                        <h5><?= $News->Title ?></h5>
-                        <p><?= $News->Description ?></p>
-                    </div>
+?> 
+                    <a href="/shownews.php?id=<?= $News->Id ?>" class="text-decoration-none" style="color:unset;">
+                        <div class="news">
+                            <small><?= date("d.m.Y", strtotime($News->Date)) ?></small>
+                            <h5><?= $News->Title ?></h5>
+                            <p><?= $News->Description ?></p>
+                        </div>
+                    </a>
 <?php 
 }
 ?>
