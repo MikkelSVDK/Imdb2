@@ -91,8 +91,12 @@ foreach($Movie->GetComments() as $comment){
     $commentUser = $comment->GetUser();
 ?>
             <blockquote class="blockquote">
-                <footer class="blockquote-footer"><?= $commentUser->Firstname." ".$commentUser->Lastname ?> <cite title="Source Title"><?= date("d-m-Y", strtotime($comment->Date)) ?></cite></footer>
+                <header class="blockquote-footer"><?= $commentUser->Firstname." ".$commentUser->Lastname ?> <cite title="Source Title"><?= date("d-m-Y", strtotime($comment->Date)) ?></cite></header>
                 <p class="mb-0"><?= $comment->Text ?></p>
+<?php if($User != null && $User->IsAdmin()){ ?>
+                <br>
+                <footer class="blockquote-footer"><a href="/actions/comments/delete.php?id=<?= $comment->Id ?>">DELETE</a></footer>
+<?php } ?>
             </blockquote>
 <?php 
 }
