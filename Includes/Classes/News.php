@@ -20,15 +20,19 @@ class News {
     }
     
     public function Delete(){
-        
+        $deleteResult = $this->Database->Query("DELETE FROM `News` WHERE `news_id` = ?", "s", $this->Id);
+        return true;
     }
 
     public function Edit(){
-        
+        $editResult = $this->Database->Query("UPDATE `News` SET `news_title` = ?, `news_description` = ? WHERE `news_id` = ?", "sss", $this->Title, $this->Description, $this->Id);
+        return true;
     }
 
-    public function Create(){
-        
+    public function Create($user_id){
+        $createResult = $this->Database->Query("INSERT INTO `News` (`news_id`, `user_id`, `news_title`, `news_description`, `news_date`) VALUES (NULL, ?, ?, ?, current_timestamp())", "sss", $user_id, $this->Title, $this->Description);
+        $this->Id = $this->Database->GetLastInsertedId();
+        return true;
     }
 
     public function Get($id){
