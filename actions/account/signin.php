@@ -10,8 +10,8 @@ if($userResult->num_rows > 0){
         header("Location: /profile.php");
         die();
     }else
-        setcookie("signin_error", "Forkert kode eller email", time() + 1, "/");
+        setcookie("error", "Forkert kode eller email", time() + 1, "/");
 }else
-    setcookie("signin_error", "Forkert kode eller email", time() + 1, "/");
+    setcookie("error", "Forkert kode eller email", time() + 1, "/");
 
 header("Location: $_SERVER[HTTP_REFERER]");

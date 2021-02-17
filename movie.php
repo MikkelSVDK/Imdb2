@@ -1,7 +1,11 @@
 <?php
 require("includes/core.php");
 $Movie = new Movie($Database);
-$Movie->Get($_GET["id"]);
+try{
+    $Movie->Get($_GET["id"]);
+}catch(Exception $err) {
+    header("Location: /movies.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
