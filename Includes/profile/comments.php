@@ -14,12 +14,19 @@ while($commentData = $commentResult->fetch_assoc()){
                 </a>
             </div>
             <div class="col-lg-11">
-                <blockquote class="blockquote">
-                    <header class="blockquote-footer"><?= $commentUser->Firstname." ".$commentUser->Lastname ?> <cite title="Source Title"><?= date("d-m-Y", strtotime($Comment->Date)) ?></cite></header>
-                    <p class="mb-0"><?= $Comment->Text ?></p>
-                    <br>
-                    <footer class="blockquote-footer"><a href="/actions/comments/delete.php?id=<?= $Comment->Id ?>">DELETE</a></footer>
-                </blockquote>
+            <blockquote class="blockquote">
+                <header class="blockquote-footer"><?= $commentUser->Firstname." ".$commentUser->Lastname ?> <cite title="Source Title"><?= date("d-m-Y", strtotime($Comment->Date)) ?></cite></header>
+<?php for ($i = 0; $i < 5; $i++) { if($Comment->Rating > $i){ ?>
+                <i class="fas fa-star"></i>
+<?php }else{ ?>
+                <i class="far fa-star"></i>
+<?php }} ?>
+                <p class="mb-0"><?= $Comment->Text ?></p>
+<?php if(($User != null && $User->IsAdmin()) || ($User != null && $commentUser->Id == $User->Id)){ ?>
+                <br>
+                <footer class="blockquote-footer"><a href="/actions/comments/delete.php?id=<?= $Comment->Id ?>">DELETE</a></footer>
+<?php } ?>
+            </blockquote>
             </div>
         </div>
 <?php

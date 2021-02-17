@@ -90,3 +90,11 @@ a:hover{
     text-decoration: none;
     color: unset;
 }
+
+.error-box-bottom{
+    position: fixed;
+    bottom: 3px;
+    right: 20px;
+    z-index: 1;
+    border: 0;
+}

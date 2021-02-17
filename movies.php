@@ -13,17 +13,18 @@
         <div class="container">
             <div class="row">
 <?php
+$sort = !empty($_GET["sort"]) ? $_GET["sort"] : "none";
 $i = 0;
 
 if(empty($_GET["search"])){
-    if(empty($_GET["sort"]))
-        $query = "SELECT `movie_id` FROM `Moives`";
-    else if($_GET["sort"] == "latest")
+    if($sort == "latest")
         $query = "SELECT `movie_id` FROM `Moives` ORDER BY `movie_release` DESC";
-        else if($_GET["sort"] == "mostcommented")
+    else if($sort == "mostcommented")
         $query = "SELECT `Moives`.`movie_id`, `Comments`.`comments` FROM `Moives` LEFT OUTER JOIN (SELECT `movie_id`, count(`comment_id`) AS `comments` FROM `Comments` GROUP BY `movie_id`) AS `Comments` ON `Comments`.`movie_id` = `Moives`.`movie_id` ORDER BY `Comments`.`comments` DESC";
-        else if($_GET["sort"] == "commingsoon")
+    else if($sort == "commingsoon")
         $query = "SELECT `movie_id` FROM `Moives` WHERE `movie_release` > CURRENT_TIMESTAMP ORDER BY `movie_release` ASC";
+    else
+        $query = "SELECT `movie_id` FROM `Moives`";
     $movieResult = $Database->Query($query);
 }else{
     $search = "%".implode("%", str_split($_GET["search"]))."%";
