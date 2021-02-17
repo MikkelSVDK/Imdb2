@@ -35,6 +35,8 @@ else if($action == "edituser")
     include("includes/admin/edituser.php");
 else if($action == "seetickets")
     include("includes/admin/seetickets.php");
+else if($action == "editticket")
+    include("includes/admin/editticket.php");
 
 include("includes/footer.php");
 ?>
